@@ -1,0 +1,64 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[[redirects]]
+  from = "/"
+  to = "/lp01"
+  status = 302
+
+[[redirects]]
+  from = "/lp-01"
+  to = "/lp01"
+  status = 301
+
+[[redirects]]
+  from = "/lp-02"
+  to = "/lp02"
+  status = 301
+
+[[redirects]]
+  from = "/lp-03"
+  to = "/lp03"
+  status = 301
+
+[[redirects]]
+  from = "/lp-04"
+  to = "/lp04"
+  status = 301
+
+[[redirects]]
+  from = "/lp-05"
+  to = "/lp05"
+  status = 301
+
+[[redirects]]
+  from = "/lp-06"
+  to = "/lp06"
+  status = 301
+
+[[redirects]]
+  from = "/lp-07"
+  to = "/lp07"
+  status = 301
+
+[[redirects]]
+  from = "/lp-08"
+  to = "/lp08"
+  status = 301
+
+[[redirects]]
+  from = "/lp-09"
+  to = "/lp09"
+  status = 301
+
+[[redirects]]
+  from = "/lp-10"
+  to = "/lp10"
+  status = 301
+
+# SPA fallback for React Router routes
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
