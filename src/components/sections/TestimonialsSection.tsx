@@ -31,6 +31,46 @@ export const TestimonialsSection = ({ copy }: { copy?: TestimonialsCopy }) => {
   const resolvedCopy = copy ?? defaultCopy;
   const testimonials = resolvedCopy.testimonials;
 
+  if (resolvedCopy.mode === "documents") {
+    return (
+      <section className="py-12 lg:py-16 px-4 bg-white">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-center text-purple-brand font-bold text-2xl lg:text-3xl xl:text-4xl mb-6">
+            {resolvedCopy.title}
+          </h2>
+          {resolvedCopy.documentsBody ? (
+            <p className="text-gray-700 text-base lg:text-lg text-center mb-8">
+              {resolvedCopy.documentsBody}
+            </p>
+          ) : null}
+
+          {resolvedCopy.documentsBullets?.length ? (
+            <div className="rounded-2xl border border-lavender bg-lavender/5 p-5 lg:p-6">
+              <ul className="space-y-3">
+                {resolvedCopy.documentsBullets.map((item, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <span className="mt-1 inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-vibrant/10 text-blue-vibrant font-bold">
+                      ✓
+                    </span>
+                    <span className="text-gray-900 text-base lg:text-lg leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
+          {resolvedCopy.documentsWarning ? (
+            <div className="mt-6 rounded-xl border border-yellow-vibrant/30 bg-yellow-vibrant/10 p-4">
+              <p className="text-gray-900 font-semibold text-base">{resolvedCopy.documentsWarning}</p>
+            </div>
+          ) : null}
+        </div>
+      </section>
+    );
+  }
+
+  if (!testimonials.length) return null;
+
   return (
     <section className="py-12 lg:py-16 px-4 bg-white">
       <div className="container mx-auto max-w-6xl">
@@ -99,9 +139,11 @@ export const TestimonialsSection = ({ copy }: { copy?: TestimonialsCopy }) => {
           ))}
         </div>
 
-        <div className="flex justify-center">
-          <GuaranteeStamp />
-        </div>
+        {resolvedCopy.showGuaranteeStamp === false ? null : (
+          <div className="flex justify-center">
+            <GuaranteeStamp />
+          </div>
+        )}
       </div>
     </section>
   );

@@ -1,5 +1,5 @@
 
-import { Check } from "lucide-react";
+import { Check, CheckCircle2, XCircle } from "lucide-react";
 import type { SolutionCopy } from "@/content/lpVariants";
 
 const defaultCopy: SolutionCopy = {
@@ -37,6 +37,85 @@ const defaultCopy: SolutionCopy = {
 export const SolutionSection = ({ copy }: { copy?: SolutionCopy }) => {
   const resolvedCopy = copy ?? defaultCopy;
   const solutions = resolvedCopy.items;
+
+  if (resolvedCopy.mode === "lp02") {
+    return (
+      <section className="py-12 lg:py-16 px-4 bg-lavender/8">
+        <div className="container mx-auto max-w-6xl">
+          {resolvedCopy.eligibilityTitle ? (
+            <h2 className="text-blue-vibrant font-bold text-2xl lg:text-3xl xl:text-4xl mb-8 text-center">
+              {resolvedCopy.eligibilityTitle}
+            </h2>
+          ) : null}
+
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 mb-10">
+            <div className="rounded-2xl border border-lavender bg-white p-5 lg:p-6">
+              <div className="flex items-center gap-2 mb-4">
+                <CheckCircle2 className="w-6 h-6 text-green-600" aria-hidden="true" />
+                <h3 className="text-gray-900 font-bold text-lg lg:text-xl">
+                  {resolvedCopy.eligibilityYesTitle ?? "Indicado"}
+                </h3>
+              </div>
+              <ul className="space-y-3">
+                {(resolvedCopy.eligibilityYesItems ?? []).map((item, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-blue-vibrant flex-shrink-0 mt-0.5" aria-hidden="true" />
+                    <span className="text-gray-800 text-base leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="rounded-2xl border border-lavender bg-white p-5 lg:p-6">
+              <div className="flex items-center gap-2 mb-4">
+                <XCircle className="w-6 h-6 text-red-600" aria-hidden="true" />
+                <h3 className="text-gray-900 font-bold text-lg lg:text-xl">
+                  {resolvedCopy.eligibilityNoTitle ?? "Não indicado"}
+                </h3>
+              </div>
+              <ul className="space-y-3">
+                {(resolvedCopy.eligibilityNoItems ?? []).map((item, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                    <span className="text-gray-800 text-base leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {resolvedCopy.analysisTitle ? (
+            <h2 className="text-purple-brand font-bold text-2xl lg:text-3xl xl:text-4xl mb-2 text-center">
+              {resolvedCopy.analysisTitle}
+            </h2>
+          ) : null}
+          {resolvedCopy.analysisBody ? (
+            <p className="text-gray-700 text-base lg:text-lg mb-8 text-center max-w-4xl mx-auto">
+              {resolvedCopy.analysisBody}
+            </p>
+          ) : null}
+
+          {resolvedCopy.analysisBullets?.length ? (
+            <div className="max-w-4xl mx-auto rounded-2xl border border-lavender bg-white p-5 lg:p-6">
+              <ul className="space-y-3">
+                {resolvedCopy.analysisBullets.map((item, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-blue-vibrant flex-shrink-0 mt-0.5" aria-hidden="true" />
+                    <span className="text-gray-800 text-base lg:text-lg leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+              {resolvedCopy.analysisNote ? (
+                <p className="text-gray-600 text-sm lg:text-base mt-5">
+                  {resolvedCopy.analysisNote}
+                </p>
+              ) : null}
+            </div>
+          ) : null}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-12 lg:py-16 px-4 bg-lavender/8">

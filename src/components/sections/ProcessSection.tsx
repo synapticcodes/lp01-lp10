@@ -1,6 +1,10 @@
 
 import { ClipboardList, Search, PiggyBank } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import type { ProcessCopy } from "@/content/lpVariants";
+import { Button } from "@/components/ui/button";
+import { LeadFormDialog } from "@/components/ui/LeadFormDialog";
+import { useState } from "react";
 
 const defaultCopy: ProcessCopy = {
   title: "Como funciona em 3 passos simples",
@@ -25,6 +29,7 @@ const defaultCopy: ProcessCopy = {
 
 export const ProcessSection = ({ copy }: { copy?: ProcessCopy }) => {
   const resolvedCopy = copy ?? defaultCopy;
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const steps = [
     {
@@ -79,7 +84,21 @@ export const ProcessSection = ({ copy }: { copy?: ProcessCopy }) => {
             </div>
           ))}
         </div>
+
+        {resolvedCopy.ctaLabel ? (
+          <div className="mt-10 flex justify-center">
+            <Button
+              onClick={() => setIsDialogOpen(true)}
+              className="w-full sm:w-auto min-h-12 h-auto py-3 bg-purple-brand hover:bg-lavender-800 text-white font-semibold px-6 text-base rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 whitespace-normal text-center leading-snug"
+            >
+              {resolvedCopy.ctaLabel}
+              <ArrowRight className="w-4 h-4 text-yellow-vibrant" />
+            </Button>
+          </div>
+        ) : null}
       </div>
+
+      <LeadFormDialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} />
     </section>
   );
 };

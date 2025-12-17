@@ -15,11 +15,16 @@ interface LeadData {
   discountReason?: string;
 }
 
-export const useAirtableSubmission = () => {
+type AirtableSubmissionOptions = {
+  navigateOnSuccess?: boolean;
+};
+
+export const useAirtableSubmission = (options: AirtableSubmissionOptions = {}) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
   const utmParams = useUTMParams();
+  const navigateOnSuccess = options.navigateOnSuccess ?? true;
 
   const airtable = {
     token: (import.meta.env.VITE_AIRTABLE_TOKEN as string | undefined) ?? "",
@@ -98,8 +103,10 @@ export const useAirtableSubmission = () => {
         const result = await response.json();
         console.log("Lead submitted successfully:", result);
         
-        // Redirecionar para a página de agradecimento
-        navigate("/obrigado");
+        // Redirecionar para a página de agradecimento (quando habilitado)
+        if (navigateOnSuccess) {
+          navigate("/obrigado");
+        }
         
         // On successful submission, mark that lead was submitted
         localStorage.setItem('leadSubmitted', 'true');
@@ -130,7 +137,9 @@ export const useAirtableSubmission = () => {
             const result = await response.json();
             console.log("Lead submitted successfully (fallback):", result);
 
-            navigate("/obrigado");
+            if (navigateOnSuccess) {
+              navigate("/obrigado");
+            }
             localStorage.setItem('leadSubmitted', 'true');
             return true;
           }

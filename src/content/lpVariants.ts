@@ -5,19 +5,38 @@ export interface HeroCopy {
   eyebrow: string;
   headline: string;
   subheadline: string;
+  bullets?: string[];
   ctaLabel: string;
+  ctaMicrocopy?: string;
+  eligibilityNotice?: string;
+  topBarText?: string;
+  topBarMicrotext?: string;
+  boosterText?: string;
+  showTrustBar?: boolean;
+  trustBlockTitle?: string;
+  trustBlockItems?: string[];
+  showGuaranteeStamp?: boolean;
 }
 
 export interface FinalCtaCopy {
   title: string;
   body: string;
   ctaLabel: string;
+  microcopy?: string;
+  showGuaranteeStamp?: boolean;
+  footerIdentificationLines?: string[];
+  footerDisclaimer?: string;
+  privacyPolicyTitle?: string;
+  privacyPolicyBody?: string;
 }
 
 export interface ProblemCopy {
   badge: string;
   title: string;
+  intro?: string;
   bullets: string[];
+  note?: string;
+  showCalculator?: boolean;
   calculatorTitle: string;
   calculatorBody: string;
   benefitLabel: string;
@@ -34,6 +53,16 @@ export interface SolutionItemCopy {
 export interface SolutionCopy {
   title: string;
   subtitle: string;
+  mode?: "default" | "lp02";
+  eligibilityTitle?: string;
+  eligibilityYesTitle?: string;
+  eligibilityYesItems?: string[];
+  eligibilityNoTitle?: string;
+  eligibilityNoItems?: string[];
+  analysisTitle?: string;
+  analysisBody?: string;
+  analysisBullets?: string[];
+  analysisNote?: string;
   badgeLeft: string;
   badgeRight: string;
   items: SolutionItemCopy[];
@@ -55,6 +84,11 @@ export interface TestimonialCopy {
 export interface TestimonialsCopy {
   title: string;
   testimonials: TestimonialCopy[];
+  mode?: "default" | "documents";
+  documentsBody?: string;
+  documentsBullets?: string[];
+  documentsWarning?: string;
+  showGuaranteeStamp?: boolean;
 }
 
 export interface ProcessStepCopy {
@@ -65,6 +99,7 @@ export interface ProcessStepCopy {
 export interface ProcessCopy {
   title: string;
   steps: ProcessStepCopy[];
+  ctaLabel?: string;
 }
 
 export interface FaqItemCopy {
@@ -208,8 +243,167 @@ export const landingVariants: Record<string, LandingCopy> = {
   "lp02": {
     ...base,
     hero: {
-      ...base.hero,
-      headline: "Aposentado do INSS? Veja como bloquear descontos abusivos no seu benefício em até 30 dias.",
+      badge: "Para aposentados e pensionistas do INSS",
+      eyebrow: "",
+      headline: "Empréstimo consignado no INSS comprometendo seu benefício?",
+      subheadline:
+        "Realizamos avaliação jurídica inicial para verificar se o seu caso tem viabilidade e quais medidas cabíveis podem ser aplicadas para reorganizar os descontos e avançar rumo à quitação.",
+      bullets: [
+        "Análise do cenário de descontos no benefício",
+        "Orientação jurídica inicial com base em documentos",
+        "Atendimento pelo WhatsApp, com sigilo profissional",
+      ],
+      ctaLabel: "✅ Solicitar triagem do meu caso",
+      ctaMicrocopy: "Serviço jurídico remunerado mediante contrato. Sem promessa de resultado.",
+      eligibilityNotice:
+        "Não atuamos em casos de CLT/consignado privado. Não oferecemos empréstimo.",
+      topBarText:
+        "Atuação jurídica voltada a aposentados e pensionistas do INSS com desconto de empréstimo consignado no benefício.",
+      topBarMicrotext: "Conteúdo informativo. Atendimento mediante análise individual.",
+      boosterText: "",
+      showTrustBar: false,
+      trustBlockTitle: "Como funciona o primeiro contato",
+      trustBlockItems: [
+        "Triagem rápida (2 minutos)",
+        "Você envia informações básicas e, se fizer sentido, seguimos com a análise",
+        "Seus dados são tratados conforme a Política de Privacidade (LGPD)",
+      ],
+      showGuaranteeStamp: false,
+    },
+    problem: {
+      ...base.problem,
+      badge: "Quando o consignado pesa",
+      title: "Quando o consignado pesa, o benefício deixa de fechar",
+      intro: "Alguns sinais comuns em quem procura ajuda jurídica para consignado no INSS:",
+      bullets: [
+        "Desconto mensal alto no benefício, sobrando pouco para despesas da casa",
+        "Vários contratos de consignado (ou refinanciamentos ao longo do tempo)",
+        "Dificuldade para organizar parcelas e enxergar um caminho de quitação",
+        "Insegurança com descontos e contratos, sem saber o que é possível fazer",
+      ],
+      note: "Cada caso é individual e depende de análise documental.",
+      showCalculator: false,
+      calculatorTitle: "",
+      calculatorBody: "",
+      benefitLabel: "",
+      percentLabel: "",
+      resultLabel: "",
+      closingLine: "",
+    },
+    solution: {
+      ...base.solution,
+      mode: "lp02",
+      title: "",
+      subtitle: "",
+      eligibilityTitle: "Este atendimento é indicado para quem",
+      eligibilityYesTitle: "Indicado",
+      eligibilityYesItems: [
+        "Recebe benefício do INSS (aposentadoria ou pensão)",
+        "Tem empréstimo consignado descontando no benefício",
+        "Está com dificuldade de equilibrar o orçamento familiar por causa dos descontos",
+        "Busca orientação jurídica para reorganizar o cenário e caminhar para a quitação",
+      ],
+      eligibilityNoTitle: "Não indicado",
+      eligibilityNoItems: [
+        "CLT/consignado privado (desconto em folha de empresa)",
+        "Quem procura empréstimo novo ou liberação de crédito",
+        "Quem busca “resultado garantido” ou soluções imediatas sem análise",
+      ],
+      analysisTitle: "O que avaliamos na etapa inicial",
+      analysisBody:
+        "A avaliação jurídica inicial tem o objetivo de entender o seu cenário e indicar o caminho adequado. Em geral, analisamos:",
+      analysisBullets: [
+        "Quantidade de contratos e valor aproximado dos descontos mensais",
+        "Tipo de desconto vinculado ao benefício e histórico do endividamento",
+        "Documentos e informações necessárias para confirmar o cenário",
+        "Possíveis medidas jurídicas cabíveis para reorganização do caso (quando houver viabilidade)",
+      ],
+      analysisNote:
+        "Não há garantia de resultado. A atuação depende das particularidades e documentos do caso.",
+    },
+    testimonials: {
+      ...base.testimonials,
+      mode: "documents",
+      title: "O que pode ser solicitado na triagem",
+      testimonials: [],
+      documentsBody: "Para agilizar, podemos pedir alguns itens (conforme o caso):",
+      documentsBullets: [
+        "Extrato/registro de empréstimos consignados do benefício",
+        "Comprovante do desconto mensal (quando disponível)",
+        "Informações básicas sobre contratos ativos",
+      ],
+      documentsWarning: "⚠️ Não solicitamos senha de aplicativos, e não pedimos códigos de verificação.",
+      showGuaranteeStamp: false,
+    },
+    process: {
+      ...base.process,
+      title: "Como funciona em 3 etapas",
+      ctaLabel: "✅ Solicitar triagem do meu caso",
+      steps: [
+        {
+          title: "Triagem (2 minutos)",
+          description:
+            "Você responde perguntas rápidas para verificarmos se o caso é de consignado no INSS e se faz sentido avançar.",
+        },
+        {
+          title: "Coleta de informações essenciais",
+          description:
+            "Caso seja elegível, solicitamos os documentos/prints necessários para entender o cenário de descontos.",
+        },
+        {
+          title: "Avaliação jurídica e próximos passos",
+          description:
+            "Com as informações, apresentamos a viabilidade e o encaminhamento possível, conforme o caso.",
+        },
+      ],
+    },
+    faq: {
+      ...base.faq,
+      title: "Perguntas frequentes",
+      items: [
+        {
+          question: "Vocês atendem CLT (carteira assinada)?",
+          answer: "Não. A atuação é voltada a casos de empréstimo consignado com desconto no benefício do INSS.",
+        },
+        {
+          question: "Isso é empréstimo ou liberação de crédito?",
+          answer: "Não. Trata-se de serviço jurídico, com avaliação e atuação conforme a viabilidade do caso.",
+        },
+        {
+          question: "Tem custo?",
+          answer: "Sim. A atuação jurídica é remunerada mediante contrato. Os detalhes são apresentados após a triagem e análise inicial.",
+        },
+        {
+          question: "Em quanto tempo resolve?",
+          answer: "Depende do caso e dos documentos. Não é possível garantir prazo ou resultado.",
+        },
+        {
+          question: "Quais informações preciso enviar?",
+          answer: "Na triagem, pedimos informações básicas. Se o caso for elegível, solicitamos documentos essenciais para análise.",
+        },
+        {
+          question: "Meus dados ficam seguros?",
+          answer: "Seguimos práticas de segurança e tratamos dados conforme nossa Política de Privacidade.",
+        },
+        {
+          question: "Vocês pedem senha do Meu INSS/banco?",
+          answer: "Não.",
+        },
+      ],
+    },
+    finalCta: {
+      ...base.finalCta,
+      title: "Quer verificar se o seu caso se encaixa?",
+      body:
+        "Responda a triagem rápida. Se houver viabilidade, nossa equipe entra em contato pelo WhatsApp.",
+      ctaLabel: "✅ Solicitar triagem do meu caso",
+      microcopy: "Serviço jurídico remunerado mediante contrato. Conteúdo informativo.",
+      showGuaranteeStamp: false,
+      footerDisclaimer:
+        "Esta página tem caráter informativo e não substitui consulta jurídica individual. A atuação depende de análise do caso concreto e documentação.",
+      privacyPolicyTitle: "Política de Privacidade (LGPD)",
+      privacyPolicyBody:
+        "Usamos seus dados apenas para realizar a triagem e retornar contato sobre o atendimento jurídico. Não solicitamos senhas, códigos de verificação ou acesso a aplicativos. Você pode solicitar atualização ou exclusão de dados pelos canais informados no rodapé.",
     },
   },
   "lp03": {
