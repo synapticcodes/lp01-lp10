@@ -17,6 +17,7 @@ interface FloatingLabelInputProps {
   isValidating?: boolean;
   isValid?: boolean | null;
   validationError?: string | null;
+  required?: boolean;
 }
 
 export const FloatingLabelInput = ({ 
@@ -31,7 +32,8 @@ export const FloatingLabelInput = ({
   setFocusedField,
   isValidating = false,
   isValid = null,
-  validationError = null
+  validationError = null,
+  required = true,
 }: FloatingLabelInputProps) => {
   const isFocused = focusedField === id;
   const hasValue = value.length > 0;
@@ -64,7 +66,7 @@ export const FloatingLabelInput = ({
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full min-w-0">
       <div className="relative">
         {renderIcon()}
         <Input
@@ -78,7 +80,7 @@ export const FloatingLabelInput = ({
           className={`h-11 pl-10 pr-4 text-base rounded-lg border-gray-200 focus:border-lavender-400 focus:ring-lavender-400 transition-all duration-200 ${showFloatingLabel ? 'pt-5 pb-2' : ''} ${
             showError ? 'border-red-300 focus:border-red-400 focus:ring-red-400' : ''
           }`}
-          required
+          required={required}
           disabled={type === 'tel' ? isValidating : false}
         />
       </div>

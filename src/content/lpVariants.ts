@@ -1000,9 +1000,198 @@ export const landingVariants: Record<string, LandingCopy> = {
     ...base,
     hero: {
       ...base.hero,
-      headline: "Se você recebe INSS e tem descontos, faça uma análise gratuita do seu caso agora.",
+      badge: "EXCLUSIVO PARA APOSENTADOS E PENSIONISTAS DO INSS (ACIMA DE R$ 3.000)",
+      eyebrow: "Benefício INSS com desconto alto de consignado?",
+      headline:
+        "Aposentado ou Pensionista do INSS? Reduza até 60% nas parcelas do seu empréstimo consignado e quite dívidas altas de forma definitiva.",
       subheadline:
-        "Atendimento humano e paciente: ajudamos aposentados e pensionistas do INSS a revisar descontos, reduzir abusos e organizar a vida financeira sem sair de casa.",
+        "Exclusivo para quem recebe benefício INSS acima de R$ 3.000 e tem descontos altos comprometendo a aposentadoria. Libere sua margem consignada e volte a receber seu benefício com mais tranquilidade.",
+      ctaLabel: "Quero uma análise gratuita do meu caso",
+      ctaMicrocopy: "Leva menos de 2 minutos. Atendimento 100% digital e com sigilo.",
+      eligibilityNotice:
+        "Importante: atendemos apenas aposentados e pensionistas do INSS com empréstimos consignados ativos. Não atuamos com CLT/consignado privado e não oferecemos empréstimo novo. A análise é gratuita; resultados dependem do caso e da documentação.",
+      boosterText:
+        "Cansado de ver grande parte do seu benefício indo para parcelas? Ajudamos a bloquear descontos abusivos, reduzir parcelas e buscar quitação definitiva com acompanhamento especializado.",
+    },
+    clarification: {
+      mode: "eligibility",
+      title: "Essa solução é ideal se você:",
+      intro:
+        "Para proteger seu tempo (e o nosso), confira os requisitos mínimos antes de avançar para a análise gratuita.",
+      left: {
+        title: "✅ SIM — perfil ideal",
+        bullets: [
+          "É aposentado ou pensionista do INSS",
+          "Recebe benefício mensal acima de R$ 3.000",
+          "Tem empréstimos consignados ativos com descontos no benefício",
+          "Dívidas altas em consignados (acima de R$ 15.000 costuma trazer melhores resultados)",
+          "Quer acompanhamento personalizado por especialistas",
+        ],
+      },
+      right: {
+        title: "❌ NÃO conseguimos ajudar se",
+        bullets: [
+          "Você não é aposentado/pensionista do INSS",
+          "Seu benefício é até R$ 3.000",
+          "Você não tem consignados ativos descontando no benefício",
+          "Você busca empréstimo novo/liberação de crédito",
+          "O caso é CLT/consignado privado (desconto em folha de empresa)",
+        ],
+      },
+      exampleTitle: "Se não se enquadra, tudo bem",
+      exampleBody:
+        "Se seu perfil mudar (por exemplo, benefício acima de R$ 3.000 e consignados ativos), volte aqui e faremos uma nova triagem.",
+    },
+    problem: {
+      ...base.problem,
+      badge: "Quando o consignado aperta",
+      title: "Quando o consignado consome sua aposentadoria, sobra pouco para viver",
+      intro:
+        "Se você tem descontos altos no benefício do INSS, estes sinais costumam aparecer:",
+      bullets: [
+        "Parcelas de consignado comprometendo remédios, contas e despesas básicas",
+        "Refinanciamentos que aumentam prazos e prendem a renda por anos",
+        "Margem consignada travada, sem espaço para reorganizar a vida",
+        "Dúvidas sobre cobranças, taxas e descontos que parecem abusivos",
+        "Ansiedade por ver o benefício cair e desaparecer em descontos automáticos",
+      ],
+      calculatorTitle: "Veja quanto sai do seu benefício todo mês",
+      calculatorBody:
+        "Informe valores aproximados apenas para ter noção do impacto. A análise do caso é individual.",
+      benefitLabel: "Seu benefício (R$)",
+      percentLabel: "% descontado em consignados",
+      resultLabel: "Estimativa",
+      closingLine:
+        "Se os descontos estão altos, uma análise especializada pode indicar caminhos legais para reduzir parcelas e liberar margem.",
+    },
+    solution: {
+      ...base.solution,
+      title: "Por que escolher nossa ajuda?",
+      subtitle:
+        "Assessoria especializada em consignados no benefício do INSS, com triagem e plano personalizado conforme a sua documentação.",
+      badgeLeft: "INSS",
+      badgeRight: "Especialistas em consignado no benefício",
+      items: [
+        { action: "Análise completa e gratuita", description: "do seu caso INSS" },
+        { action: "Acompanhamento personalizado", description: "por especialistas em direito previdenciário" },
+        { action: "Redução em até 60%", description: "das parcelas atuais (conforme elegibilidade)" },
+        { action: "Bloqueio de descontos indevidos", description: "no benefício, quando identificados" },
+        { action: "Liberação de margem consignada", description: "para reorganizar seu orçamento" },
+        { action: "Recuperação de valores", description: "pagos indevidamente nos últimos 5 anos, quando cabível" },
+        { action: "Atendimento 100% digital", description: "sem sair de casa, com orientação clara" },
+        { action: "Compromisso com resultado", description: "para casos elegíveis (condições contratuais)" },
+      ],
+      beforeAfterTitle: "Antes / Depois (exemplo)",
+      beforeLabel: "Antes",
+      beforeRight: "Parcela alta",
+      afterLabel: "Depois",
+      afterRight: "Parcela reduzida",
+      beforeBarPercent: 80,
+      afterBarPercent: 40,
+      footer:
+        "Sem promessas irreais: atuamos com base no seu extrato e documentação. Resultados e prazos variam conforme o caso.",
+    },
+    testimonials: {
+      ...base.testimonials,
+      title: "Quem já conquistou sua liberdade financeira",
+      testimonials: [
+        {
+          name: "Evaristo Neto",
+          role: "Aposentado",
+          text:
+            "Como aposentado do INSS, eu tinha R$ 25.000 em dívidas consignadas descontando todo mês. Reduziram minhas parcelas em 55% e liberaram minha margem. Recomendo!",
+          image: "/lovable-uploads/770f24ba-712b-48c6-8348-629c55780154.png",
+        },
+        {
+          name: "Maria Santos",
+          role: "Pensionista",
+          text:
+            "Em pouco tempo, organizaram meu caso e reduziram os descontos no meu benefício. Hoje recebo bem melhor e consigo pagar minhas contas com tranquilidade.",
+          image: "/lovable-uploads/0159e8f4-d08a-4cc3-b6b5-99ffcd5ba296.png",
+        },
+        {
+          name: "Carlos Oliveira",
+          role: "Servidor público aposentado",
+          text:
+            "Profissionais sérios e transparentes. Reduzi parcelas e avancei para a quitação de dívidas que me preocupavam há anos. Atendimento ótimo do começo ao fim.",
+          image: "/lovable-uploads/66607520-da93-457f-9540-627eb8234316.png",
+        },
+      ],
+    },
+    process: {
+      ...base.process,
+      title: "Como funciona em 3 passos simples",
+      ctaLabel: "Quero uma análise gratuita do meu caso",
+      steps: [
+        {
+          title: "Preencha o formulário",
+          description:
+            "Informe seus dados básicos e responda perguntas rápidas sobre seu benefício e consignados.",
+        },
+        {
+          title: "Análise gratuita",
+          description:
+            "Nossa equipe analisa seu caso com base nas informações e, se necessário, solicita documentos para confirmar o cenário.",
+        },
+        {
+          title: "Plano personalizado",
+          description:
+            "Se elegível, apresentamos um plano para reduzir parcelas, bloquear descontos indevidos e buscar a melhor estratégia de quitação.",
+        },
+      ],
+    },
+    faq: {
+      ...base.faq,
+      title: "Perguntas frequentes",
+      items: [
+        {
+          question: "Como vocês conseguem reduzir meus descontos?",
+          answer:
+            "Analisamos seu extrato e a documentação do benefício para identificar descontos irregulares e aplicar medidas administrativas e/ou judiciais cabíveis para reduzir parcelas e bloquear abusos, quando houver base legal.",
+        },
+        {
+          question: "Quanto tempo demora para ver resultados?",
+          answer:
+            "Em muitos casos, há avanços iniciais em 30 a 90 dias. O prazo depende da análise, documentação e do tipo de medida necessária.",
+        },
+        {
+          question: "A análise é realmente grátis?",
+          answer:
+            "Sim. A triagem e a análise inicial são 100% gratuitas e sem compromisso. Só seguimos com assessoria mediante elegibilidade e aceite do plano.",
+        },
+        {
+          question: "Preciso sair de casa?",
+          answer:
+            "Não. O atendimento é 100% digital (WhatsApp, e-mail e, se necessário, vídeo), com assinatura eletrônica e orientação passo a passo.",
+        },
+        {
+          question: "E se não conseguirem reduzir parcelas ou avançar para quitação?",
+          answer:
+            "Trabalhamos com compromisso de resultado para casos elegíveis, com condições previstas em contrato. Cada caso é individual e depende de análise documental.",
+        },
+        {
+          question: "Atendem servidor público estadual/federal?",
+          answer:
+            "Sim, atendemos aposentados de regimes próprios, desde que haja consignados descontados no benefício.",
+        },
+        {
+          question: "Preciso pagar algo adiantado?",
+          answer:
+            "Não. O investimento na assessoria é apresentado após a análise e pode ser parcelado. Você decide com clareza antes de seguir.",
+        },
+        {
+          question: "Como sei se meu caso é elegível?",
+          answer:
+            "Preencha o formulário. Em até 24h úteis, um especialista entra em contato para orientar os próximos passos da pré-análise.",
+        },
+      ],
+    },
+    finalCta: {
+      ...base.finalCta,
+      title: "Pronto para recuperar seu benefício INSS?",
+      body:
+        "Não deixe dívidas altas comprometerem sua aposentadoria. Faça uma análise gratuita e descubra se existe um caminho para reduzir parcelas, liberar margem e organizar a quitação.",
+      ctaLabel: "Sim, quero recuperar minha margem consignada",
     },
   },
   "lp06": {
