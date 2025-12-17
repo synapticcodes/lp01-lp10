@@ -2,6 +2,8 @@
 import { Check, CheckCircle2, XCircle } from "lucide-react";
 import type { SolutionCopy } from "@/content/lpVariants";
 
+const clampPercent = (value: number) => Math.min(100, Math.max(0, value));
+
 const defaultCopy: SolutionCopy = {
   title: "Não é milagre, é lei",
   subtitle:
@@ -37,6 +39,8 @@ const defaultCopy: SolutionCopy = {
 export const SolutionSection = ({ copy }: { copy?: SolutionCopy }) => {
   const resolvedCopy = copy ?? defaultCopy;
   const solutions = resolvedCopy.items;
+  const beforePercent = clampPercent(resolvedCopy.beforeBarPercent ?? 80);
+  const afterPercent = clampPercent(resolvedCopy.afterBarPercent ?? 100);
 
   if (resolvedCopy.mode === "lp02") {
     return (
@@ -151,14 +155,14 @@ export const SolutionSection = ({ copy }: { copy?: SolutionCopy }) => {
                 <div className="flex items-center justify-between gap-4">
                   <span className="text-gray-800 font-semibold">{resolvedCopy.beforeLabel}</span>
                   <div className="flex-1 h-3 rounded-full bg-gray-200 overflow-hidden">
-                    <div className="h-full w-4/5 bg-yellow-vibrant" />
+                    <div className="h-full bg-yellow-vibrant" style={{ width: `${beforePercent}%` }} />
                   </div>
                   <span className="text-gray-800 font-semibold">{resolvedCopy.beforeRight}</span>
                 </div>
                 <div className="flex items-center justify-between gap-4">
                   <span className="text-gray-800 font-semibold">{resolvedCopy.afterLabel}</span>
                   <div className="flex-1 h-3 rounded-full bg-gray-200 overflow-hidden">
-                    <div className="h-full w-full bg-blue-vibrant" />
+                    <div className="h-full bg-blue-vibrant" style={{ width: `${afterPercent}%` }} />
                   </div>
                   <span className="text-gray-800 font-semibold">{resolvedCopy.afterRight}</span>
                 </div>

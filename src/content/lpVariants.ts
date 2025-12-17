@@ -71,6 +71,8 @@ export interface SolutionCopy {
   beforeRight: string;
   afterLabel: string;
   afterRight: string;
+  beforeBarPercent?: number;
+  afterBarPercent?: number;
   footer: string;
 }
 
@@ -114,12 +116,27 @@ export interface FaqCopy {
 
 export interface LandingCopy {
   hero: HeroCopy;
+  clarification?: ClarificationCopy;
   problem: ProblemCopy;
   solution: SolutionCopy;
   testimonials: TestimonialsCopy;
   process: ProcessCopy;
   faq: FaqCopy;
   finalCta: FinalCtaCopy;
+}
+
+export interface ClarificationColumnCopy {
+  title: string;
+  bullets: string[];
+}
+
+export interface ClarificationCopy {
+  title: string;
+  intro?: string;
+  left: ClarificationColumnCopy;
+  right: ClarificationColumnCopy;
+  exampleTitle?: string;
+  exampleBody?: string;
 }
 
 const base: LandingCopy = {
@@ -239,7 +256,160 @@ const base: LandingCopy = {
 };
 
 export const landingVariants: Record<string, LandingCopy> = {
-  "lp01": base,
+  "lp01": {
+    ...base,
+    hero: {
+      badge: "APOSENTADOS/PENSIONISTAS DO INSS (ACIMA DE R$ 3.000)",
+      eyebrow: "Benefício do INSS com desconto alto de consignado?",
+      headline:
+        "Solução jurídica especializada para reduzir descontos de consignado em até 70%",
+      subheadline:
+        "Serviço de advocacia previdenciária focado exclusivamente em aposentados com dívidas altas.",
+      ctaLabel: "Quero minha análise jurídica",
+      eligibilityNotice:
+        "Importante: somos um escritório de advocacia especializado em direito previdenciário. NÃO somos consultoria financeira, NÃO fazemos empréstimos e NÃO somos correspondente bancário.\n\nNossa diferença: atuamos com mecanismos jurídicos específicos da legislação de proteção ao aposentado, evitando os custos e a demora de processos judiciais convencionais.",
+      boosterText: "Atuação 100% remota via WhatsApp/telefone • Sigilo profissional",
+    },
+    clarification: {
+      title: "Como é possível ser jurídico sem ser judicial?",
+      intro: "Entenda a diferença:",
+      left: {
+        title: "Processo Judicial Tradicional",
+        bullets: [
+          "Demora 2–5 anos",
+          "Custos altos com honorários",
+          "Necessidade de audiências presenciais",
+          "Resultado incerto",
+        ],
+      },
+      right: {
+        title: "Nossa Abordagem Jurídica Especializada",
+        bullets: [
+          "Atuação administrativa e negociação extrajudicial",
+          "Baseada em leis específicas de proteção ao consumidor idoso",
+          "Processo 100% remoto via WhatsApp/telefone",
+          "Resultados em 3–6 meses (conforme o caso)",
+          "Honorários fixos e transparentes",
+        ],
+      },
+      exampleTitle: "Exemplo concreto",
+      exampleBody:
+        "A Lei 10.741/2003 (Estatuto do Idoso) e o Código de Defesa do Consumidor oferecem mecanismos específicos para revisão de contratos que podem ser utilizados antes de qualquer ação judicial.",
+    },
+    problem: {
+      ...base.problem,
+      badge: "Quando o consignado vira sufoco",
+      title: "Se o consignado consome o benefício, a vida não fecha",
+      intro:
+        "Se você recebe mais de R$ 3.000 e está com descontos altos, estes sinais costumam aparecer:",
+      bullets: [
+        "Descontos mensais que comprometem o orçamento (aluguel, remédios e contas básicas)",
+        "Vários contratos de consignado (e refinanciamentos ao longo do tempo)",
+        "Juros e condições difíceis de entender, com sensação de “bola de neve”",
+        "Medo de ficar sem dinheiro no fim do mês e depender de familiares",
+        "Dúvidas sobre irregularidades e abusos nos contratos",
+      ],
+    },
+    solution: {
+      ...base.solution,
+      title: "Não é milagre: é atuação jurídica previdenciária",
+      subtitle:
+        "Atuamos com mecanismos jurídicos específicos para aposentados, via abordagem jurídica administrativa e negociação extrajudicial — e, quando necessário, com medidas judiciais específicas e ágeis.",
+      badgeRight: "Mecanismos jurídicos específicos para aposentados",
+      items: [
+        {
+          action: "Análise técnica dos contratos",
+          description: "para identificar vícios, abusos e irregularidades",
+        },
+        {
+          action: "Notificações e pedidos administrativos",
+          description: "com base na legislação aplicável ao consumidor idoso",
+        },
+        {
+          action: "Negociação extrajudicial estruturada",
+          description: "com argumentação jurídica e prerrogativas da advocacia",
+        },
+        {
+          action: "Medidas judiciais específicas (quando necessário)",
+          description: "sempre com sua autorização e foco em agilidade",
+        },
+      ],
+    beforeAfterTitle: "Impacto no seu mês (exemplo)",
+    beforeRight: "Desconto alto",
+    afterRight: "Até 70% menor",
+    beforeBarPercent: 90,
+    afterBarPercent: 30,
+    footer:
+      "Atuação jurídica focada em negociação extrajudicial e proteção do seu benefício (conforme o caso).",
+  },
+    process: {
+      title: "Como funciona (passo a passo jurídico)",
+      steps: [
+        {
+          title: "Etapa 1: Análise Jurídica Especializada",
+          description:
+            "Nossos advogados previdenciários analisam seus contratos identificando vícios, abusos e irregularidades à luz da legislação específica de proteção ao aposentado.",
+        },
+        {
+          title: "Etapa 2: Estratégia Jurídica Personalizada",
+          description:
+            "Desenvolvemos um plano baseado nos mecanismos legais disponíveis: notificações extrajudiciais, pedidos administrativos aos bancos e, quando necessário, medidas judiciais específicas e ágeis.",
+        },
+        {
+          title: "Etapa 3: Atuação Jurídica Estruturada",
+          description:
+            "Atuamos junto às instituições com argumentação técnica sólida, utilizando as prerrogativas da advocacia para obter reduções significativas.",
+        },
+        {
+          title: "Etapa 4: Acompanhamento Jurídico Contínuo",
+          description:
+            "Garantimos a efetividade dos acordos e a proteção permanente do seu benefício.",
+        },
+      ],
+      ctaLabel: "Quero falar com um especialista",
+    },
+    faq: {
+      title: "Perguntas frequentes",
+      items: [
+        {
+          question: "Isso é um processo judicial?",
+          answer:
+            "Não necessariamente. Iniciamos sempre com atuação administrativa e negociação extrajudicial, utilizando mecanismos legais específicos. Apenas em casos excepcionais (e sempre com sua autorização) recorremos a medidas judiciais específicas.",
+        },
+        {
+          question: "Vocês são advogados?",
+          answer:
+            "Sim. Somos escritório de advocacia especializado em direito previdenciário e proteção do consumidor idoso. Nossa OAB está disponível para consulta.",
+        },
+        {
+          question: "Vou precisar ir à Justiça?",
+          answer:
+            "Em 92% dos casos, resolvemos via negociação extrajudicial utilizando os mecanismos legais disponíveis. Nos 8% restantes, utilizamos medidas judiciais específicas e ágeis.",
+        },
+        {
+          question: "Qual a vantagem sobre um advogado comum?",
+          answer:
+            "Especialização. Trabalhamos exclusivamente com aposentados do INSS e conhecemos profundamente a legislação específica que os protege.",
+        },
+      ],
+    },
+    finalCta: {
+      title: "Quer saber se você se qualifica para a solução?",
+      body:
+        "Responda uma triagem rápida. Se o seu caso se encaixar, nossa equipe jurídica entra em contato para orientar os próximos passos.",
+      ctaLabel: "Falar com especialista",
+      microcopy: "Atendimento jurídico mediante análise individual. Sem promessa de resultado.",
+      showGuaranteeStamp: false,
+      footerIdentificationLines: [
+        "Informações Importantes:",
+        "• Serviço prestado por escritório de advocacia regularmente inscrito na OAB",
+        "• Honorários advocatícios conforme tabela da OAB/SP",
+        "• Resultados podem variar conforme caso concreto",
+        "• Não garantimos resultados específicos, mas atuamos com base na legislação aplicável",
+      ],
+      footerDisclaimer: "Processo sujeito à análise prévia de viabilidade jurídica.",
+    },
+  },
   "lp02": {
     ...base,
     hero: {

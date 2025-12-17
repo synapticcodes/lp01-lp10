@@ -12,6 +12,13 @@ interface LeadData {
   benefitAbove2k?: 'yes' | 'no' | 'unknown';
   benefitRange?: string;
   age?: number;
+  inssSituation?: string;
+  debtType?: string;
+  discountRange?: string;
+  benefitAmount?: number;
+  debtsTotal?: number;
+  bankMain?: string;
+  leadType?: string;
   discountReason?: string;
 }
 
@@ -67,6 +74,15 @@ export const useAirtableSubmission = (options: AirtableSubmissionOptions = {}) =
         "Benefício > R$ 2.000": leadData.benefitAbove2k ? leadData.benefitAbove2k : undefined,
         "Faixa do benefício": leadData.benefitRange,
         "Idade": typeof leadData.age === 'number' ? leadData.age : undefined,
+        "Situação perante o INSS": leadData.inssSituation,
+        "Tipo de dívida": leadData.debtType,
+        "Faixa de descontos": leadData.discountRange,
+        "Valor do benefício (R$)":
+          typeof leadData.benefitAmount === "number" ? leadData.benefitAmount : undefined,
+        "Total de dívidas (R$)":
+          typeof leadData.debtsTotal === "number" ? leadData.debtsTotal : undefined,
+        "Banco principal": leadData.bankMain,
+        "Tipo de lead": leadData.leadType,
         "Motivo dos descontos": leadData.discountReason,
       };
 

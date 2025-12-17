@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { ClarificationSection } from "@/components/sections/ClarificationSection";
 import { ProblemSection } from "@/components/sections/ProblemSection";
 import { SolutionSection } from "@/components/sections/SolutionSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
@@ -29,6 +30,7 @@ const Landing = ({ variantKeyOverride }: LandingProps) => {
       <Header />
       <main className="pb-20 md:pb-0">
         <HeroSection copy={copy.hero} />
+        <ClarificationSection copy={copy.clarification} />
         <ProblemSection copy={copy.problem} />
         <SolutionSection copy={copy.solution} />
         <TestimonialsSection copy={copy.testimonials} />
