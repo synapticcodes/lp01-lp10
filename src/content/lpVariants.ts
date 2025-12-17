@@ -1198,7 +1198,160 @@ export const landingVariants: Record<string, LandingCopy> = {
     ...base,
     hero: {
       ...base.hero,
-      headline: "Aposentado do INSS: pare de perder dinheiro todo mês com descontos que podem ser ilegais.",
+      badge: "ATENDIMENTO EXCLUSIVO — INSS E SERVIDOR PÚBLICO APOSENTADO",
+      eyebrow: "Aposentado, pensionista ou servidor público com consignado alto?",
+      headline: "Aposentado, o Consignado Está Consumindo Mais de 40% do Seu INSS?",
+      subheadline:
+        "Atendemos exclusivamente aposentados, pensionistas do INSS e servidores públicos com dívidas de consignado abusivas. Recupere até 90% da sua renda e limpe seu nome sem sair de casa, com um processo 100% online.",
+      ctaLabel: "SIM, QUERO FALAR COM UM ESPECIALISTA",
+      eligibilityNotice:
+        "Importante: nosso atendimento é voltado apenas para aposentados/pensionistas do INSS e servidores públicos aposentados com dívidas de consignado. Se não for seu caso, vamos te orientar para os canais mais adequados.",
+      boosterText: "Análise gratuita • Atendimento 100% digital • Dados protegidos (LGPD)",
+    },
+    clarification: {
+      mode: "eligibility",
+      title: "Este serviço é para você?",
+      intro:
+        "Para garantir um atendimento rápido e eficaz, atendemos exclusivamente um perfil específico de consignado.",
+      left: {
+        title: "Sim — normalmente conseguimos ajudar quando:",
+        bullets: [
+          "Você é aposentado do INSS, pensionista do INSS ou servidor público aposentado",
+          "Tem 55+ (ou 40–54 com dívidas altas de consignado)",
+          "Seu benefício costuma ser acima de R$ 3.000 (prioridade)",
+          "Suas dívidas de consignado somam mais de R$ 10.000 (ideal: acima de R$ 30.000)",
+          "Você tem 2 ou mais empréstimos consignados ativos",
+        ],
+      },
+      right: {
+        title: "Não — vamos indicar outros caminhos se:",
+        bullets: [
+          "Você não é aposentado/pensionista/servidor público aposentado",
+          "Seu benefício é até R$ 2.000",
+          "Sua dívida de consignado é até R$ 10.000",
+          "O problema é outro tipo de dívida (cartão, pessoal, etc.)",
+        ],
+      },
+    },
+    problem: {
+      ...base.problem,
+      badge: "O preço alto de não agir",
+      title: "Quando o consignado passa do limite, a sua vida vira refém dos descontos",
+      bullets: [
+        "Descontos consignados que comprometem 40%, 50% ou até 80% do seu benefício",
+        "Juros abusivos que só aumentam mês após mês",
+        "Nome sujo que impede novas oportunidades e crédito",
+        "Estresse constante e noites mal dormidas",
+        "Dependência financeira dos filhos, mesmo após uma vida de trabalho",
+      ],
+      showCalculator: false,
+      note:
+        "Se você recebe mais de R$ 3.000 de benefício mas fica com menos da metade na mão, você não está sozinho.",
+      closingLine:
+        "Cada mês sem agir é mais dinheiro saindo do seu benefício.",
+    },
+    solution: {
+      ...base.solution,
+      title: "Uma solução simples, rápida e transparente",
+      subtitle:
+        "Nossa equipe especializada em direitos do aposentado analisa contratos de consignado e atua para proteger sua renda — sem você precisar sair de casa.",
+      items: [
+        { action: "Bloquear", description: "novos descontos ilegais no seu benefício" },
+        { action: "Reduzir em até 90%", description: "as parcelas que você paga hoje (quando aplicável)" },
+        { action: "Limpar seu nome", description: "dos órgãos de proteção ao crédito" },
+        { action: "Devolver valores", description: "pagos indevidamente nos últimos 5 anos" },
+      ],
+      beforeAfterTitle: "Antes / Depois (exemplo)",
+      beforeLabel: "Antes",
+      beforeRight: "40% no bolso",
+      afterLabel: "Depois",
+      afterRight: "até 90% no bolso",
+      beforeBarPercent: 40,
+      afterBarPercent: 90,
+      footer: "Processo 100% online, com acompanhamento personalizado do início ao fim.",
+    },
+    testimonials: {
+      ...base.testimonials,
+      title: "Quem já conquistou liberdade financeira",
+      testimonials: [
+        {
+          name: "Evaristo Neto",
+          role: "Aposentado do INSS",
+          text: "Recuperei R$ 60 mil em descontos indevidos do meu consignado. Agora posso viver com dignidade.",
+        },
+        {
+          name: "João Santos",
+          role: "Pensionista do INSS",
+          text: "Em 30 dias, quitaram R$ 55 mil das minhas dívidas de consignado. Recomendo!",
+        },
+        {
+          name: "Ana Costa",
+          role: "Servidora Pública Aposentada",
+          text: "Profissionais sérios que realmente cumprem o que prometem. Recebi R$ 10.000 em indenização por abusos no meu consignado.",
+        },
+      ],
+    },
+    process: {
+      title: "Como funciona em 3 passos simples",
+      steps: [
+        {
+          title: "PREENCHA O FORMULÁRIO (2 min)",
+          description: "Clique no botão e responda as perguntas para nossa equipe avaliar seu consignado.",
+        },
+        {
+          title: "ANÁLISE GRATUITA",
+          description: "Um especialista analisa seu caso, focando nos contratos e nos descontos do consignado.",
+        },
+        {
+          title: "DINHEIRO NO CONTROLE",
+          description: "Com a estratégia correta, você volta a ter renda na mão e o nome limpo — com acompanhamento digital.",
+        },
+      ],
+      ctaLabel: "✅ QUERO MINHA ANÁLISE GRATUITA",
+    },
+    faq: {
+      title: "Perguntas frequentes",
+      items: [
+        {
+          question: "Como vocês podem reduzir meus descontos de consignado?",
+          answer:
+            "Atuamos na revisão de contratos de consignado, identificando abusos como juros excessivos, descontos acima do permitido e outras irregularidades. Com base na lei, negociamos com os bancos para reduzir o valor das parcelas e, quando cabível, recuperar valores pagos a mais.",
+        },
+        {
+          question: "Quanto tempo demora para ver resultados?",
+          answer:
+            "Em média, em 30 a 60 dias já é possível ver uma redução significativa nos descontos. O processo completo pode levar de 3 a 6 meses, dependendo da complexidade do caso.",
+        },
+        {
+          question: "É realmente grátis a análise?",
+          answer:
+            "Sim. A análise inicial é 100% gratuita. Só apresentamos custos após entender o caso e você ter clareza do caminho — você decide se quer seguir.",
+        },
+        {
+          question: "Preciso sair de casa?",
+          answer:
+            "Não. Todo o processo é feito online, por WhatsApp, telefone e e-mail. Você não precisa ir a nenhum escritório.",
+        },
+        {
+          question: "E se não conseguirem me ajudar?",
+          answer:
+            "Se a análise indicar que não há irregularidades ou que não há ganho possível, informamos com transparência. Nessa situação, você não paga nada.",
+        },
+        {
+          question: "Vocês atendem apenas aposentados?",
+          answer:
+            "Sim. Somos especializados em aposentados, pensionistas do INSS e servidores públicos aposentados com dívidas de consignado. Não atendemos outros perfis ou tipos de dívida.",
+        },
+      ],
+    },
+    finalCta: {
+      ...base.finalCta,
+      title: "Não deixe mais um mês passar perdendo dinheiro com descontos abusivos",
+      body:
+        "Cada dia que passa sem agir é dinheiro que sai do seu bolso. Milhares de aposentados e pensionistas já recuperaram sua dignidade financeira.\n\nNossa missão é simples: devolver o controle do seu dinheiro para você.",
+      ctaLabel: "🚀 SIM, QUERO RECUPERAR MINHA RENDA AGORA",
+      microcopy:
+        "✅ 100% Garantido • ✅ Atendimento imediato • ✅ Dados 100% seguros • ✅ Sem compromisso",
     },
   },
   "lp07": {
