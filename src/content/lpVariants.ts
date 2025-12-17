@@ -767,8 +767,233 @@ export const landingVariants: Record<string, LandingCopy> = {
   "lp04": {
     ...base,
     hero: {
-      ...base.hero,
-      headline: "Descontos no benefício do INSS te sufocando? Podemos ajudar a recuperar sua tranquilidade financeira.",
+      badge: "⚠️ EXCLUSIVO PARA APOSENTADOS E PENSIONISTAS",
+      eyebrow: "Dívidas de consignado consumindo seu benefício?",
+      headline: "Reduza Até 90% das Suas Dívidas de Empréstimo Consignado",
+      subheadline:
+        "Solução jurídica especializada para aposentados que comprometeram seu benefício com múltiplos consignados.",
+      bullets: [
+        "Apenas Aposentados/Pensionistas",
+        "Renda mínima R$ 3.000",
+        "Dívidas acima de R$ 15.000",
+      ],
+      ctaLabel: "VERIFICAR SE ME QUALIFICO - GRÁTIS",
+      ctaMicrocopy: "🔒 Seus dados estão seguros | ⏱️ Resposta em até 2 horas úteis",
+      boosterText: "Análise inicial gratuita e sem compromisso.",
+    },
+    clarification: {
+      mode: "eligibility",
+      title: "Você se Enquadra no Nosso Programa?",
+      intro:
+        "Nosso serviço jurídico é especializado e atende apenas casos que se enquadram nos seguintes critérios:",
+      left: {
+        title: "Critérios para atendimento",
+        bullets: [
+          "É aposentado ou pensionista do INSS/Servidor Público",
+          "Recebe benefício mensal acima de R$ 3.000",
+          "Possui empréstimo consignado descontado na folha",
+          "Suas dívidas somam mais de R$ 15.000",
+          "Mais de 35% do seu benefício está comprometido",
+          "Tem condições de investir em assessoria jurídica especializada",
+        ],
+      },
+      right: {
+        title: "Este programa não é indicado se você…",
+        bullets: [
+          "É CLT/Autônomo (não atendemos nesta modalidade)",
+          "Recebe benefício mensal de até R$ 3.000",
+          "Tem dívidas de consignado abaixo de R$ 15.000",
+          "Tem até 30% do benefício comprometido com descontos",
+        ],
+      },
+      exampleTitle: "Se você respondeu SIM para todos os itens acima, podemos te ajudar!",
+      exampleBody: "Continue rolando para preencher o formulário de qualificação.",
+    },
+    problem: {
+      badge: "⚠️ Aviso importante",
+      title: "Serviço jurídico especializado com investimento (não é gratuito)",
+      intro:
+        "Nosso trabalho envolve advogados especializados, estratégia personalizada e acompanhamento do seu caso — por isso há investimento. A análise inicial é gratuita.",
+      bullets: [
+        "Sem cobranças antecipadas para análise",
+        "12x de R$ 450 (parcelamento padrão)",
+        "12x de R$ 350 (condições especiais)",
+        "26x de R$ 195 (casos específicos)",
+        "O investimento é mínimo comparado à economia que você pode ter",
+        "Não trabalhamos com casos gratuitos ou pro-bono",
+      ],
+      showCalculator: false,
+      calculatorTitle: "Calcule quanto você perde por mês",
+      calculatorBody: "Informe um valor aproximado. É só para ter uma noção do tamanho do prejuízo.",
+      benefitLabel: "Seu benefício (R$)",
+      percentLabel: "% descontada",
+      resultLabel: "Resultado",
+      closingLine: "Pior: cada mês que passa, mais dinheiro do seu benefício vai para os bancos.",
+    },
+    solution: {
+      title: "Como Reduzimos Suas Dívidas Legalmente",
+      subtitle:
+        "Utilizamos estratégias jurídicas especializadas para renegociar suas dívidas consignadas com descontos de até 90%.",
+      badgeLeft: "Jurídico",
+      badgeRight: "Estratégia baseada em jurisprudência favorável",
+      items: [
+        {
+          action: "Análise gratuita",
+          description: "do seu caso, das dívidas consignadas e da sua margem de benefício",
+        },
+        {
+          action: "Estratégia jurídica personalizada",
+          description: "com base em jurisprudência favorável para superendividamento",
+        },
+        {
+          action: "Execução e negociação",
+          description: "direta com os bancos para buscar redução de dívida e parcelas mais viáveis",
+        },
+        {
+          action: "Acompanhamento profissional",
+          description: "com transparência e orientação em cada etapa do processo",
+        },
+      ],
+      beforeAfterTitle: "Antes / Depois",
+      beforeLabel: "Antes",
+      beforeRight: "Dívidas altas",
+      afterLabel: "Depois",
+      afterRight: "Até 90% menor",
+      beforeBarPercent: 100,
+      afterBarPercent: 10,
+      footer: "O objetivo é desafogar seu benefício e te devolver tranquilidade financeira.",
+    },
+    testimonials: {
+      title: "Aposentados Que Já Conquistaram Sua Liberdade Financeira",
+      showProofImages: true,
+      showGuaranteeStamp: false,
+      testimonials: [
+        {
+          name: "José Carlos",
+          role: "64 anos — Aposentado INSS",
+          text:
+            "⭐⭐⭐⭐⭐ “Tinha R$ 52.000 em dívidas de consignado e só me sobravam R$ 800 do meu benefício de R$ 3.200. Após o trabalho da equipe, consegui reduzir para R$ 15.000 e agora respiro! Vale cada centavo investido.”",
+          image: "/lovable-uploads/770f24ba-712b-48c6-8348-629c55780154.png",
+        },
+        {
+          name: "Maria Aparecida",
+          role: "59 anos — Pensionista",
+          text:
+            "⭐⭐⭐⭐⭐ “Estava pagando 7 consignados diferentes que consumiam quase todo meu benefício. Hoje pago apenas uma parcela acessível e voltei a ter qualidade de vida. Recomendo para todos os aposentados!”",
+          image: "/lovable-uploads/0159e8f4-d08a-4cc3-b6b5-99ffcd5ba296.png",
+        },
+        {
+          name: "Antônio Silva",
+          role: "67 anos — Servidor aposentado",
+          text:
+            "⭐⭐⭐⭐⭐ “Achei que nunca sairia dessa bola de neve. Com mais de R$ 68.000 em dívidas, consegui negociar por R$ 22.000. Agora posso ajudar meus netos e viver dignamente com meu benefício.” Redução de 68% nas dívidas totais.",
+          image: "/lovable-uploads/66607520-da93-457f-9540-627eb8234316.png",
+        },
+      ],
+    },
+    process: {
+      title: "Como Reduzimos Suas Dívidas Legalmente",
+      steps: [
+        {
+          title: "PASSO 1 — Análise gratuita",
+          description:
+            "Nosso especialista analisa seu caso, suas dívidas consignadas e sua margem de benefício para verificar a viabilidade.",
+        },
+        {
+          title: "PASSO 2 — Estratégia jurídica",
+          description:
+            "Desenvolvemos uma estratégia personalizada baseada em jurisprudência favorável para aposentados superendividados.",
+        },
+        {
+          title: "PASSO 3 — Execução e resultados",
+          description:
+            "Nossa equipe jurídica negocia diretamente com os bancos para reduzir suas dívidas e desafogar seu benefício.",
+        },
+      ],
+      ctaLabel: "QUERO FALAR COM UM ESPECIALISTA AGORA",
+    },
+    faq: {
+      title: "Dúvidas Frequentes dos Aposentados",
+      items: [
+        {
+          question: "1. Quem pode ser atendido por vocês?",
+          answer:
+            "Atendemos exclusivamente aposentados e pensionistas (INSS ou servidores públicos) que recebem benefício acima de R$ 3.000 mensais, possuem dívidas de empréstimo consignado acima de R$ 15.000, têm mais de 35% do benefício comprometido com descontos e podem investir em assessoria jurídica especializada.",
+        },
+        {
+          question: "2. CLT pode ser atendido?",
+          answer:
+            "Nosso programa é especializado em aposentados e pensionistas. Trabalhadores CLT ativos têm situação jurídica diferente e não se enquadram no nosso método.",
+        },
+        {
+          question: "3. Como vocês conseguem reduzir até 90% das dívidas?",
+          answer:
+            "Utilizamos estratégias jurídicas baseadas em legislação específica para proteção de aposentados superendividados. Nossa equipe jurídica especializada negocia com os bancos usando jurisprudência favorável.",
+        },
+        {
+          question: "4. Quanto custa o serviço?",
+          answer:
+            "Trabalhamos com investimento acessível: 12x de R$ 450 (modalidade padrão), 12x de R$ 350 (condições especiais) ou 26x de R$ 195 (casos específicos). A economia gerada tende a ser maior que o investimento.",
+        },
+        {
+          question: "5. Preciso pagar algo antes para fazer a análise?",
+          answer:
+            "Não. A análise inicial do seu caso é gratuita. Você só investe após entender o processo e decidir prosseguir.",
+        },
+        {
+          question: "6. Quanto tempo demora o processo?",
+          answer:
+            "O processo varia de acordo com cada caso, geralmente entre 4 e 12 meses. Nossa equipe mantém você informado em todas as etapas.",
+        },
+        {
+          question: "7. Vou parar de pagar os consignados?",
+          answer:
+            "Orientamos sobre o melhor momento estratégico para suspender pagamentos conforme a estratégia jurídica — sempre dentro da legalidade e com acompanhamento profissional.",
+        },
+        {
+          question: "8. Meu nome vai ficar sujo?",
+          answer:
+            "Trabalhamos para minimizar impactos no CPF. O objetivo é resolver a situação de forma legal e sustentável, protegendo seu benefício.",
+        },
+        {
+          question: "9. Como sei que é confiável?",
+          answer:
+            "Você terá contrato, acompanhamento transparente e uma equipe jurídica especializada. Resultados e prazos variam conforme o caso e a documentação.",
+        },
+        {
+          question: "10. E se minha dívida for pequena (menos de R$ 15.000)?",
+          answer:
+            "Nosso serviço é direcionado a casos mais complexos com dívidas maiores. Para dívidas menores, o custo-benefício do processo jurídico pode não compensar.",
+        },
+        {
+          question: "11. Servidor público ativo pode ser atendido?",
+          answer:
+            "Se você é servidor público aposentado, sim. Servidores ativos têm dinâmica diferente e não se enquadram no nosso programa específico.",
+        },
+        {
+          question: "12. Posso parcelar o investimento?",
+          answer:
+            "Sim. Oferecemos parcelamento em até 12x ou 26x (casos específicos) para facilitar o acesso ao serviço.",
+        },
+      ],
+    },
+    finalCta: {
+      title: "Não Deixe Suas Dívidas Consumirem Seu Benefício",
+      body:
+        "Você trabalhou a vida inteira para ter uma aposentadoria digna. Não é justo que os bancos fiquem com quase todo seu benefício. ✓ Análise gratuita do seu caso • ✓ Sem compromisso inicial • ✓ Especialistas em aposentados",
+      ctaLabel: "SOLICITAR ANÁLISE GRATUITA AGORA",
+      microcopy: "Atendimento de segunda a sexta, das 8h às 18h • Resposta em até 2 horas úteis",
+      showGuaranteeStamp: false,
+      footerIdentificationLines: [
+        "Este site oferece serviços jurídicos especializados para aposentados e pensionistas.",
+        "Não somos escritório de advocacia pro-bono. Investimento necessário.",
+        "Política de Privacidade • Termos de Uso • Contato",
+      ],
+      footerDisclaimer:
+        "Conteúdo informativo. A atuação depende de análise do caso concreto e documentação. Resultados e prazos variam conforme o caso.",
+      privacyPolicyTitle: "Política de Privacidade (LGPD)",
+      privacyPolicyBody:
+        "Usamos seus dados apenas para realizar a triagem e viabilizar contato com um especialista. Não solicitamos senhas, códigos de verificação ou acesso a aplicativos.",
     },
   },
   "lp05": {
