@@ -30,6 +30,7 @@ const defaultCopy: TestimonialsCopy = {
 export const TestimonialsSection = ({ copy }: { copy?: TestimonialsCopy }) => {
   const resolvedCopy = copy ?? defaultCopy;
   const testimonials = resolvedCopy.testimonials;
+  const showProofImages = resolvedCopy.showProofImages !== false;
 
   if (resolvedCopy.mode === "documents") {
     return (
@@ -82,7 +83,7 @@ export const TestimonialsSection = ({ copy }: { copy?: TestimonialsCopy }) => {
           {testimonials.map((testimonial, index) => (
             <div key={index} className="bg-lavender/5 rounded-xl p-4 lg:p-6 relative">
               {/* Imagem quadrada grande acima do texto conforme solicitado */}
-              {index === 0 && (
+              {showProofImages && index === 0 && (
                 <div className="flex justify-center mb-4 lg:mb-6">
                   <img
                     src="/lovable-uploads/c51da9e7-37d9-415c-a912-20fb7034afbf.png"
@@ -91,7 +92,7 @@ export const TestimonialsSection = ({ copy }: { copy?: TestimonialsCopy }) => {
                   />
                 </div>
               )}
-              {index === 1 && (
+              {showProofImages && index === 1 && (
                 <div className="flex justify-center mb-4 lg:mb-6">
                   <img
                     src="/lovable-uploads/8fd9b21a-f400-48d5-96e5-9dc003edf59c.png"
@@ -100,7 +101,7 @@ export const TestimonialsSection = ({ copy }: { copy?: TestimonialsCopy }) => {
                   />
                 </div>
               )}
-              {index === 2 && (
+              {showProofImages && index === 2 && (
                 <div className="flex justify-center mb-4 lg:mb-6">
                   <img
                     src="/lovable-uploads/f170b4f7-a7a6-4ce7-a368-af9eb2f42042.png"

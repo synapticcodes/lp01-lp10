@@ -1,4 +1,5 @@
 import type { ClarificationCopy } from "@/content/lpVariants";
+import { CheckCircle2, XCircle } from "lucide-react";
 
 type ClarificationSectionProps = {
   copy?: ClarificationCopy;
@@ -6,6 +7,8 @@ type ClarificationSectionProps = {
 
 export const ClarificationSection = ({ copy }: ClarificationSectionProps) => {
   if (!copy) return null;
+
+  const isEligibilityMode = copy.mode === "eligibility";
 
   return (
     <section className="py-12 lg:py-16 px-4 bg-white border-t-2 border-lavender/20">
@@ -22,16 +25,29 @@ export const ClarificationSection = ({ copy }: ClarificationSectionProps) => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
-          <div className="rounded-2xl border border-lavender bg-white p-5 lg:p-6 text-left">
+          <div
+            className={
+              isEligibilityMode
+                ? "rounded-2xl border border-green-200 bg-green-50 p-5 lg:p-6 text-left"
+                : "rounded-2xl border border-lavender bg-white p-5 lg:p-6 text-left"
+            }
+          >
             <h3 className="text-gray-900 font-bold text-lg lg:text-xl mb-4">
               {copy.left.title}
             </h3>
             <ul className="space-y-3">
               {copy.left.bullets.map((item, index) => (
                 <li key={index} className="flex items-start gap-3">
-                  <span className="mt-0.5 inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-yellow-vibrant text-white font-bold">
-                    ✓
-                  </span>
+                  {isEligibilityMode ? (
+                    <CheckCircle2
+                      className="mt-0.5 h-6 w-6 flex-shrink-0 text-green-600"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <span className="mt-0.5 inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-yellow-vibrant text-white font-bold">
+                      ✓
+                    </span>
+                  )}
                   <span className="text-gray-800 text-base lg:text-lg leading-relaxed">
                     {item}
                   </span>
@@ -40,16 +56,29 @@ export const ClarificationSection = ({ copy }: ClarificationSectionProps) => {
             </ul>
           </div>
 
-          <div className="rounded-2xl border border-lavender bg-lavender/10 p-5 lg:p-6 text-left">
+          <div
+            className={
+              isEligibilityMode
+                ? "rounded-2xl border border-red-200 bg-red-50 p-5 lg:p-6 text-left"
+                : "rounded-2xl border border-lavender bg-lavender/10 p-5 lg:p-6 text-left"
+            }
+          >
             <h3 className="text-gray-900 font-bold text-lg lg:text-xl mb-4">
               {copy.right.title}
             </h3>
             <ul className="space-y-3">
               {copy.right.bullets.map((item, index) => (
                 <li key={index} className="flex items-start gap-3">
-                  <span className="mt-0.5 inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-vibrant text-white font-bold">
-                    ✓
-                  </span>
+                  {isEligibilityMode ? (
+                    <XCircle
+                      className="mt-0.5 h-6 w-6 flex-shrink-0 text-red-600"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <span className="mt-0.5 inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-vibrant text-white font-bold">
+                      ✓
+                    </span>
+                  )}
                   <span className="text-gray-800 text-base lg:text-lg leading-relaxed">
                     {item}
                   </span>
@@ -77,4 +106,3 @@ export const ClarificationSection = ({ copy }: ClarificationSectionProps) => {
     </section>
   );
 };
-

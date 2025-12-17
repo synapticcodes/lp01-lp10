@@ -87,6 +87,7 @@ export interface TestimonialsCopy {
   title: string;
   testimonials: TestimonialCopy[];
   mode?: "default" | "documents";
+  showProofImages?: boolean;
   documentsBody?: string;
   documentsBullets?: string[];
   documentsWarning?: string;
@@ -131,6 +132,7 @@ export interface ClarificationColumnCopy {
 }
 
 export interface ClarificationCopy {
+  mode?: "default" | "eligibility";
   title: string;
   intro?: string;
   left: ClarificationColumnCopy;
@@ -580,7 +582,186 @@ export const landingVariants: Record<string, LandingCopy> = {
     ...base,
     hero: {
       ...base.hero,
-      headline: "Aposentado ou pensionista do INSS? Reduza juros abusivos e proteja seu benefício.",
+      topBarText:
+        "ATENÇÃO: ATENDIMENTO EXCLUSIVO PARA SERVIDORES PÚBLICOS, APOSENTADOS E PENSIONISTAS.",
+      badge: "Somente para servidores públicos, aposentados e pensionistas",
+      eyebrow:
+        "Se a parcela do consignado está tirando sua paz, este atendimento pode ser para você.",
+      headline: "O Banco desconta mais de 30% do seu benefício todo mês? Isso pode ser ilegal.",
+      subheadline:
+        "Recupere o controle do seu salário. Atuamos na revisão administrativa e judicial de parcelas de empréstimos consignados que comprometem sua dignidade e o sustento da sua família.",
+      ctaLabel: "QUERO ANALISAR MEU CASO GRATUITAMENTE",
+      ctaMicrocopy:
+        "Análise sigilosa. Não somos banco, somos uma assessoria especializada em proteção de renda.",
+      boosterText: "Atendimento sério, com orientação clara e sem promessas irreais.",
+      showTrustBar: true,
+      showGuaranteeStamp: false,
+    },
+    clarification: {
+      mode: "eligibility",
+      title: "Para quem é esta Assessoria Especializada?",
+      intro:
+        "Para proteger seu tempo (e o nosso), confira abaixo se o seu perfil se encaixa antes de avançar.",
+      left: {
+        title: "✅ SIM — NÓS ATENDEMOS",
+        bullets: [
+          "Aposentados pelo INSS",
+          "Pensionistas",
+          "Servidores públicos (federais, estaduais e municipais)",
+          "Renda familiar acima de R$ 3.000",
+          "Dificuldade com empréstimos consignados (desconto em folha/benefício)",
+        ],
+      },
+      right: {
+        title: "❌ NÃO ATENDEMOS",
+        bullets: [
+          "Trabalhadores CLT (empresa privada)",
+          "Autônomos, empresários ou desempregados",
+          "Dívidas apenas de cartão de loja/varejo",
+          "Quem busca empréstimo (não emprestamos dinheiro)",
+          "Causas trabalhistas",
+        ],
+      },
+    },
+    problem: {
+      ...base.problem,
+      badge: "Quando o desconto vira sufoco",
+      title: "Você se sente trabalhando apenas para pagar juros?",
+      intro: undefined,
+      bullets: [
+        "⚠ O ciclo do refinanciamento: o “troco” aumenta o prazo e prende você por mais anos.",
+        "⚠ Salário líquido zero: o benefício cai na conta e os descontos automáticos levam quase tudo.",
+        "⚠ Bola de neve: para pagar contas básicas, você recorre ao cartão/cheque especial e cria novas dívidas.",
+      ],
+      showCalculator: false,
+      note:
+        "“Parece um caminho sem volta. Mas a legislação brasileira protege o seu mínimo existencial. O banco não pode tirar de você o dinheiro da sua sobrevivência.”",
+    },
+    solution: {
+      ...base.solution,
+      title: "Não é calote. É Justiça Financeira.",
+      subtitle:
+        "Nossa assessoria utiliza base legal do superendividamento e da defesa do consumidor para buscar uma renegociação justa e proteger sua renda.",
+      badgeLeft: "Proteção de renda",
+      badgeRight: "Negociação bancária com base legal",
+      items: [
+        {
+          action: "Auditoria de contratos",
+          description:
+            "analisamos juros, cláusulas e possíveis abusos (incluindo vendas casadas e irregularidades).",
+        },
+        {
+          action: "Trava de segurança",
+          description:
+            "atuamos para limitar descontos mensais a um valor que caiba no seu bolso, preservando seu sustento.",
+        },
+        {
+          action: "Renegociação especializada",
+          description:
+            "assumimos a conversa com os credores para reduzir o “sangramento” do seu salário e buscar condições justas.",
+        },
+      ],
+      beforeAfterTitle: "Impacto no seu mês (exemplo)",
+      beforeLabel: "Antes",
+      beforeRight: "Desconto acima do limite",
+      afterLabel: "Depois",
+      afterRight: "Desconto compatível com sua renda",
+      beforeBarPercent: 45,
+      afterBarPercent: 30,
+      footer: "A atuação depende de análise do caso concreto e documentação.",
+    },
+    testimonials: {
+      title:
+        "Chega de viver no aperto. Você trabalhou a vida toda, merece tranquilidade.",
+      testimonials: [
+        {
+          name: "Carlos M.",
+          role: "Servidor público aposentado",
+          text: "Eu achava que ia morrer pagando empréstimo. A equipe me atendeu muito bem e conseguimos reduzir a parcela em 40%.",
+          image: "/lovable-uploads/770f24ba-712b-48c6-8348-629c55780154.png",
+        },
+        {
+          name: "Ana R.",
+          role: "Pensionista",
+          text: "O que mais me aliviou foi ver dinheiro sobrando no fim do mês. Me explicaram tudo com clareza e sem enrolação.",
+          image: "/lovable-uploads/0159e8f4-d08a-4cc3-b6b5-99ffcd5ba296.png",
+        },
+        {
+          name: "Marcos P.",
+          role: "Servidor público",
+          text: "Eu estava no ciclo do refinanciamento. Depois da análise, consegui organizar os descontos e voltei a ter fôlego no orçamento.",
+          image: "/lovable-uploads/66607520-da93-457f-9540-627eb8234316.png",
+        },
+      ],
+      showGuaranteeStamp: false,
+    },
+    process: {
+      title: "Como funciona a análise (com seriedade e sigilo)",
+      steps: [
+        {
+          title: "TRIAGEM (rápida)",
+          description:
+            "Você responde 3 perguntas para confirmar se o perfil se encaixa no atendimento.",
+        },
+        {
+          title: "ANÁLISE INICIAL (gratuita)",
+          description:
+            "Se o perfil estiver aprovado, um especialista avalia o cenário e orienta os próximos passos.",
+        },
+        {
+          title: "ENCAMINHAMENTO",
+          description:
+            "Com o diagnóstico, definimos a estratégia possível (administrativa e/ou judicial), conforme o caso.",
+        },
+      ],
+      ctaLabel: "Quero fazer a triagem agora",
+    },
+    faq: {
+      title: "Dúvidas Comuns sobre a Recuperação de Margem",
+      items: [
+        {
+          question: "Vocês fazem empréstimo ou compra de dívidas?",
+          answer:
+            "Não. Somos uma assessoria especializada em negociação bancária e defesa do consumidor. Nosso trabalho é revisar seus contratos atuais para reduzir os descontos, não criar uma nova dívida. Se você procura empréstimo, este serviço não é para você.",
+        },
+        {
+          question: "O banco pode cancelar minha conta se eu procurar meus direitos?",
+          answer:
+            "É ilegal o banco retaliar o cliente por buscar a revisão de cobranças abusivas. Seu direito de questionar e proteger seu sustento é garantido por lei. Nossa equipe orienta você para que sua conta salário permaneça segura.",
+        },
+        {
+          question: "Sou funcionário de empresa privada (CLT), posso fazer?",
+          answer:
+            "No momento, nossa atuação é focada exclusivamente em servidores públicos, aposentados e pensionistas. A dinâmica de desconto em folha é diferente para estas categorias, permitindo uma defesa mais eficaz.",
+        },
+        {
+          question: "Meu nome vai ficar “sujo”?",
+          answer:
+            "O foco do nosso trabalho é a recuperação do seu salário líquido. Durante a negociação, o objetivo principal é fazer sobrar dinheiro na sua conta todo mês para você viver com dignidade.",
+        },
+        {
+          question: "Existe algum custo para realizar o serviço?",
+          answer:
+            "A análise inicial é gratuita. Caso identifiquemos viabilidade, apresentaremos uma proposta de honorários que pode ser parcelada. Você só contrata se fizer sentido para você.",
+        },
+      ],
+    },
+    finalCta: {
+      title: "Quer saber se o seu caso se encaixa?",
+      body:
+        "Faça a triagem em poucos segundos. Se você passar pelo filtro, liberamos o acesso direto ao WhatsApp para falar com um especialista.",
+      ctaLabel: "Fazer triagem agora",
+      microcopy:
+        "Atendimento exclusivo para servidores públicos, aposentados e pensionistas. Não fazemos empréstimos.",
+      showGuaranteeStamp: false,
+      footerIdentificationLines: [
+        "Este site não tem vínculo com o Governo Federal ou bancos. Somos uma empresa privada de assessoria.",
+      ],
+      footerDisclaimer:
+        "Conteúdo informativo. A atuação depende de análise do caso concreto e documentação. Resultados e prazos variam conforme o caso.",
+      privacyPolicyTitle: "Política de Privacidade (LGPD)",
+      privacyPolicyBody:
+        "Usamos seus dados apenas para realizar a triagem e viabilizar contato com um especialista. Não solicitamos senhas, códigos de verificação ou acesso a aplicativos.",
     },
   },
   "lp04": {
