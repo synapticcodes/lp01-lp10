@@ -1354,45 +1354,12 @@ export const landingVariants: Record<string, LandingCopy> = {
         "✅ 100% Garantido • ✅ Atendimento imediato • ✅ Dados 100% seguros • ✅ Sem compromisso",
     },
   },
-  "lp07": {
-    ...base,
-    hero: {
-      ...base.hero,
-      headline: "INSS: quando o desconto é abusivo, a lei pode ajudar a reduzir ou bloquear.",
-    },
-  },
-  "lp08": {
-    ...base,
-    hero: {
-      ...base.hero,
-      headline: "Aposentado/pensionista do INSS: descubra se você tem direito a revisar descontos no benefício.",
-    },
-  },
-  "lp09": {
-    ...base,
-    hero: {
-      ...base.hero,
-      headline: "Seu benefício do INSS está vindo menor por descontos? Entenda suas opções com uma análise gratuita.",
-    },
-  },
-  "lp10": {
-    ...base,
-    hero: {
-      ...base.hero,
-      headline: "Aposentado do INSS: recupere o controle do seu benefício com um passo a passo simples.",
-      ctaLabel: "Quero verificar meu caso",
-    },
-    finalCta: {
-      ...base.finalCta,
-      ctaLabel: "Quero verificar meu caso",
-    },
-  },
 };
 
 export const getLandingVariant = (key: string | undefined): LandingCopy => {
   const normalized = (() => {
     if (!key) return "lp01";
-    const match = key.match(/^lp-?(0[1-9]|10)$/);
+    const match = key.match(/^lp-?(0[1-6])$/);
     if (!match) return "lp01";
     return `lp${match[1]}`;
   })();
