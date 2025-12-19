@@ -430,11 +430,34 @@ export const Lp04LeadFormDialogContent = ({ isOpen, onClose }: LeadFormVariantPr
       localStorage.setItem("leadSubmitted", "true");
       setIsFormSubmitted(true);
       setStep("thankyou");
-      onClose();
     }
   };
 
-  if (step === "thankyou" || isFormSubmitted) {
+  if (step === "thankyou") {
+    return (
+      <DialogContent
+        className="sm:max-w-md rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.2)] border-0 [&>button]:hidden"
+        onInteractOutside={(e) => e.preventDefault()}
+        onEscapeKeyDown={(e) => e.preventDefault()}
+      >
+        <div className="text-center py-2">
+          <div className="flex justify-center mb-4">
+            <CheckCircle className="w-14 h-14 text-green-600" aria-hidden="true" />
+          </div>
+          <DialogHeader className="text-center">
+            <DialogTitle className="text-purple-brand text-2xl font-bold tracking-tight leading-tight mb-2">
+              Redirecionando para o WhatsApp...
+            </DialogTitle>
+            <p className="text-gray-600 text-base font-medium">
+              Aguarde alguns instantes. Você será redirecionado automaticamente para continuar o atendimento.
+            </p>
+          </DialogHeader>
+        </div>
+      </DialogContent>
+    );
+  }
+
+  if (isFormSubmitted) {
     return (
       <DialogContent className="sm:max-w-md rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.2)] border-0 [&>button]:hidden">
         <CloseButton onClose={onClose} />
@@ -724,52 +747,60 @@ export const Lp04LeadFormDialogContent = ({ isOpen, onClose }: LeadFormVariantPr
             <FloatingLabelInput
               id={LEAD_FIELD_IDS.name}
               type="text"
-              label="Nome completo*"
+              placeholder="Seu nome completo"
               value={formData.name}
-              onChange={(e) => handleInputChange("name", e.target.value)}
-              onFocus={() => setFocusedField("name")}
-              onBlur={() => setFocusedField(null)}
+              onChange={(value) => handleInputChange("name", value)}
               icon={User}
-              error={focusedField !== "name" ? nameValidationError ?? undefined : undefined}
-              disabled={isFormSubmitted}
-              autoComplete="name"
+              label="Nome completo"
+              focusedField={focusedField}
+              setFocusedField={setFocusedField}
+              isValid={
+                focusedField !== LEAD_FIELD_IDS.name && nameValidationError ? false : null
+              }
+              validationError={
+                focusedField !== LEAD_FIELD_IDS.name ? nameValidationError : null
+              }
             />
 
             <FloatingLabelInput
               id={LEAD_FIELD_IDS.phone}
               type="tel"
-              label="WhatsApp (com DDD)*"
+              placeholder="(11) 9 9999-9999"
               value={formData.phone}
-              onChange={(e) => handleInputChange("phone", e.target.value)}
-              onFocus={() => setFocusedField("phone")}
-              onBlur={() => setFocusedField(null)}
+              onChange={(value) => handleInputChange("phone", value)}
               icon={Phone}
-              error={
-                focusedField !== "phone"
+              label="WhatsApp (com DDD)"
+              focusedField={focusedField}
+              setFocusedField={setFocusedField}
+              isValidating={isValidating}
+              isValid={focusedField !== LEAD_FIELD_IDS.phone ? isValid : null}
+              validationError={
+                focusedField !== LEAD_FIELD_IDS.phone
                   ? validationError ||
                     (formData.phone.replace(/\D/g, "").length > 0 &&
                     formData.phone.replace(/\D/g, "").length < 11
                       ? "Informe um WhatsApp com 11 dígitos (DDD + número)."
-                      : undefined)
-                  : undefined
+                      : null)
+                  : null
               }
-              disabled={isFormSubmitted}
-              autoComplete="tel"
-              inputMode="numeric"
             />
 
             <FloatingLabelInput
               id={LEAD_FIELD_IDS.email}
               type="email"
-              label="E-mail*"
+              placeholder="Seu melhor e-mail"
               value={formData.email}
-              onChange={(e) => handleInputChange("email", e.target.value)}
-              onFocus={() => setFocusedField("email")}
-              onBlur={() => setFocusedField(null)}
+              onChange={(value) => handleInputChange("email", value)}
               icon={Mail}
-              error={focusedField !== "email" ? emailValidationError ?? undefined : undefined}
-              disabled={isFormSubmitted}
-              autoComplete="email"
+              label="E-mail"
+              focusedField={focusedField}
+              setFocusedField={setFocusedField}
+              isValid={
+                focusedField !== LEAD_FIELD_IDS.email && emailValidationError ? false : null
+              }
+              validationError={
+                focusedField !== LEAD_FIELD_IDS.email ? emailValidationError : null
+              }
             />
           </div>
 

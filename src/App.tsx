@@ -1,9 +1,10 @@
 
+import { useEffect, useRef } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { SecurityWrapper } from "@/components/security/SecurityWrapper";
 import Landing from "./pages/Landing";
 import ThankYou from "./pages/ThankYou";
@@ -22,6 +23,27 @@ const LEGACY_LP_KEYS = Array.from({ length: 6 }, (_, index) => {
   return `lp-${id}`;
 });
 
+const MetaPixelPageViewTracker = () => {
+  const location = useLocation();
+  const hasTrackedInitial = useRef(false);
+
+  useEffect(() => {
+    const fbq = (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq;
+    if (!fbq) return;
+
+    // O snippet do Pixel já dispara um PageView no carregamento inicial.
+    // Aqui disparamos apenas em mudanças de rota (SPA) para evitar duplicar.
+    if (!hasTrackedInitial.current) {
+      hasTrackedInitial.current = true;
+      return;
+    }
+
+    fbq("track", "PageView");
+  }, [location.pathname, location.search]);
+
+  return null;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -29,6 +51,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <MetaPixelPageViewTracker />
           <Routes>
             <Route path="/" element={<Navigate to="/lp01" replace />} />
             {LP_KEYS.map((key) => (

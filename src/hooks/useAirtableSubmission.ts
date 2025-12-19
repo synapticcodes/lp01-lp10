@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
-import { useUTMParams } from "@/hooks/useUTMParams";
+
+let redirectInProgress = false;
 
 interface LeadData {
   name: string;
@@ -20,6 +21,9 @@ interface LeadData {
   bankMain?: string;
   leadType?: string;
   discountReason?: string;
+  incomeOrigin?: string;
+  mainProblem?: string;
+  incomeRange?: string;
 }
 
 type AirtableSubmissionOptions = {
@@ -30,151 +34,186 @@ export const useAirtableSubmission = (options: AirtableSubmissionOptions = {}) =
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
-  const utmParams = useUTMParams();
   const navigateOnSuccess = options.navigateOnSuccess ?? true;
 
-  const airtable = {
-    token: (import.meta.env.VITE_AIRTABLE_TOKEN as string | undefined) ?? "",
-    baseId: (import.meta.env.VITE_AIRTABLE_BASE_ID as string | undefined) ?? "",
-    tableName: (import.meta.env.VITE_AIRTABLE_TABLE_NAME as string | undefined) ?? "Leads",
+  const LEADS_URL =
+    (import.meta.env.VITE_LEADS_API_URL as string | undefined) ??
+    "https://leads.meunomeok.uk/leads";
+
+  const getCookie = (name: string) => {
+    return (
+      document.cookie
+        .split(";")
+        .map((c) => c.trim())
+        .find((c) => c.startsWith(name + "="))
+        ?.split("=")[1] ?? null
+    );
+  };
+
+  const getUtms = () => {
+    const params = new URLSearchParams(window.location.search || "");
+    return {
+      utm_source: params.get("utm_source") || undefined,
+      utm_medium: params.get("utm_medium") || undefined,
+      utm_campaign: params.get("utm_campaign") || undefined,
+      utm_term: params.get("utm_term") || undefined,
+      utm_content: params.get("utm_content") || undefined,
+      utm_placement: params.get("utm_placement") || undefined,
+      utm_site_source_name: params.get("utm_site_source_name") || undefined,
+      page_url: window.location.href,
+      referrer: document.referrer || undefined,
+    };
+  };
+
+  const buildSlug = () => {
+    const host = window.location.hostname || "localhost";
+    const path = window.location.pathname || "/";
+    return `${host}${path}`;
+  };
+
+  const toOptional = (value: unknown) => {
+    if (typeof value !== "string") return undefined;
+    const v = value.trim();
+    return v ? v : undefined;
+  };
+
+  const toSimNao = (value: unknown) => {
+    if (value === true) return "Sim";
+    if (value === false) return "Não";
+    return undefined;
+  };
+
+  const toSimNaoNaoSei = (value: unknown) => {
+    if (value === "yes") return "Sim";
+    if (value === "no") return "Não";
+    if (value === "unknown") return "Não sei";
+    return undefined;
+  };
+
+  const redirectWithFallback = async (redirectUrl: string) => {
+    if (redirectInProgress) return;
+
+    // A ideia é evitar mandar o usuário para uma tela 503 do router.
+    // Tentamos validar rapidamente a URL; se retornar 5xx/timeout, caímos em /obrigado.
+    const timeoutMs = 2500;
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs);
+
+    try {
+      const url = new URL(redirectUrl);
+
+      // IMPORTANTE: nunca fazemos probe em /r/... porque isso gera ClickEvent/CTA_CLICK no backend.
+      // Em vez disso, fazemos uma checagem neutra no origin do router.
+      const probeUrl = url.origin + "/";
+
+      const response = await fetch(probeUrl, {
+        method: "GET",
+        signal: controller.signal,
+        cache: "no-store",
+        redirect: "manual",
+        mode: "cors",
+      });
+
+      if (response.status >= 500) {
+        console.warn("redirect_url indisponível (5xx); fallback para /obrigado", {
+          status: response.status,
+          probeUrl,
+        });
+        navigate("/obrigado");
+        return;
+      }
+
+      // 2xx/3xx/4xx ou qualquer outro caso não-5xx: segue o redirect.
+      redirectInProgress = true;
+      window.location.assign(redirectUrl);
+    } catch (err) {
+      // Se foi timeout, tratamos como indisponível.
+      if (err instanceof DOMException && err.name === "AbortError") {
+        console.warn("redirect_url timeout; seguindo com redirect");
+        redirectInProgress = true;
+        window.location.assign(redirectUrl);
+        return;
+      }
+
+      // Erros genéricos (inclui possível bloqueio CORS): não conseguimos validar.
+      // Para não quebrar o fluxo em ambientes onde o router está ok, seguimos com o redirect.
+      console.warn("Não foi possível validar redirect_url; seguindo com redirect", err);
+      redirectInProgress = true;
+      window.location.assign(redirectUrl);
+    } finally {
+      window.clearTimeout(timeoutId);
+    }
   };
 
   const submitLead = async (leadData: LeadData) => {
     setIsSubmitting(true);
     
     try {
-      if (!airtable.token || !airtable.baseId) {
-        console.error("Missing Airtable env vars. Set VITE_AIRTABLE_TOKEN and VITE_AIRTABLE_BASE_ID.");
-        toast({
-          title: "Configuração incompleta",
-          description: "Não foi possível enviar seus dados. Tente novamente mais tarde.",
-          variant: "destructive",
-        });
-        return false;
-      }
+      const slug = buildSlug();
+      const fbp = getCookie("_fbp");
+      const fbc = getCookie("_fbc");
+      const utms = getUtms();
 
-      const baseFields = {
-        "Nome do lead": leadData.name,
-        "Telefone do lead": leadData.phone,
-        "Email do lead": leadData.email ?? "",
-        "Utm_campaign": utmParams.utm_campaign,
-        "Utm_source": utmParams.utm_source,
-        "Utm_medium": utmParams.utm_medium,
-        "Utm_term": utmParams.utm_term,
-        "Utm_content": utmParams.utm_content,
-        "Utm_placement": utmParams.utm_placement,
-        "Utm_site_source_name": utmParams.utm_site_source_name,
-      };
-
-      const extraFields = {
-        "Aposentado/Pensionista INSS":
-          typeof leadData.isInssRetireeOrPensioner === 'boolean'
-            ? (leadData.isInssRetireeOrPensioner ? 'Sim' : 'Não')
-            : undefined,
-        "Benefício > R$ 2.000": leadData.benefitAbove2k ? leadData.benefitAbove2k : undefined,
+      const fields: Record<string, unknown> = {
+        "Aposentado/Pensionista INSS": toSimNao(leadData.isInssRetireeOrPensioner),
+        "Benefício acima de R$ 2.000?": toSimNaoNaoSei(leadData.benefitAbove2k),
         "Faixa do benefício": leadData.benefitRange,
-        "Idade": typeof leadData.age === 'number' ? leadData.age : undefined,
+        "Idade": leadData.age,
         "Situação perante o INSS": leadData.inssSituation,
         "Tipo de dívida": leadData.debtType,
         "Faixa de descontos": leadData.discountRange,
-        "Valor do benefício (R$)":
-          typeof leadData.benefitAmount === "number" ? leadData.benefitAmount : undefined,
-        "Total de dívidas (R$)":
-          typeof leadData.debtsTotal === "number" ? leadData.debtsTotal : undefined,
+        "Valor do benefício (R$)": leadData.benefitAmount,
+        "Total de dívidas (R$)": leadData.debtsTotal,
         "Banco principal": leadData.bankMain,
         "Tipo de lead": leadData.leadType,
         "Motivo dos descontos": leadData.discountReason,
+        "Origem da renda": leadData.incomeOrigin,
+        "Principal problema": leadData.mainProblem,
+        "Renda mensal aproximada": leadData.incomeRange,
       };
 
-      const buildPayload = (fields: Record<string, unknown>) => ({
-        records: [
-          {
-            fields,
-          },
-        ],
+      const payload = {
+        slug,
+        name: toOptional(leadData.name),
+        email: toOptional(leadData.email ?? ""),
+        phone: toOptional(leadData.phone),
+        fields: Object.fromEntries(Object.entries(fields).filter(([, v]) => v !== undefined)),
+        ...utms,
+        fbp: fbp ? decodeURIComponent(fbp) : undefined,
+        fbc: fbc ? decodeURIComponent(fbc) : undefined,
+      };
+
+      const res = await fetch(LEADS_URL, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(payload),
       });
 
-      const fullFields: Record<string, unknown> = {
-        ...baseFields,
-        ...Object.fromEntries(Object.entries(extraFields).filter(([, v]) => v !== undefined)),
-      };
-
-      const airtableData = buildPayload(fullFields);
-
-      console.log('Sending lead data with UTM params:', airtableData);
-
-      const postToAirtable = async (payload: unknown) =>
-        fetch(`https://api.airtable.com/v0/${airtable.baseId}/${encodeURIComponent(airtable.tableName)}`, {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${airtable.token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        });
-
-      let response = await postToAirtable(airtableData);
-
-      if (response.ok) {
-        const result = await response.json();
-        console.log("Lead submitted successfully:", result);
-        
-        // Redirecionar para a página de agradecimento (quando habilitado)
-        if (navigateOnSuccess) {
-          navigate("/obrigado");
-        }
-        
-        // On successful submission, mark that lead was submitted
-        localStorage.setItem('leadSubmitted', 'true');
-        
-        return true;
-      } else {
-        let error: any = null;
-        try {
-          error = await response.json();
-        } catch {
-          error = null;
-        }
-        console.error("Airtable API error:", error);
-
-        const errorMessage =
-          (error?.error?.message as string | undefined) ||
-          (typeof error?.message === 'string' ? error.message : undefined) ||
-          "";
-
-        const looksLikeUnknownField =
-          /UNKNOWN_FIELD_NAME|Unknown field|invalid.*field/i.test(errorMessage);
-
-        if (looksLikeUnknownField) {
-          console.warn('Airtable columns missing for extra fields; retrying with base fields only');
-          response = await postToAirtable(buildPayload(baseFields));
-
-          if (response.ok) {
-            const result = await response.json();
-            console.log("Lead submitted successfully (fallback):", result);
-
-            if (navigateOnSuccess) {
-              navigate("/obrigado");
-            }
-            localStorage.setItem('leadSubmitted', 'true');
-            return true;
-          }
-        }
-        
-        toast({
-          title: "Erro ao enviar dados",
-          description: "Não foi possível registrar seus dados. Tente novamente.",
-          variant: "destructive"
-        });
-        
-        return false;
+      if (!res.ok) {
+        throw new Error("Erro ao enviar lead");
       }
+
+      const json = (await res.json()) as { redirect_url?: string };
+
+      // On successful submission, mark that lead was submitted
+      localStorage.setItem("leadSubmitted", "true");
+
+      if (json.redirect_url) {
+        await redirectWithFallback(json.redirect_url);
+        return true;
+      }
+
+      if (navigateOnSuccess) {
+        navigate("/obrigado");
+      }
+
+      return true;
     } catch (error) {
-      console.error("Error submitting to Airtable:", error);
+      console.error("Erro ao enviar lead:", error);
       
       toast({
         title: "Erro de conexão",
-        description: "Erro ao conectar com nossos serviços. Verifique sua conexão.",
+        description: "Não foi possível enviar seus dados. Tente novamente.",
         variant: "destructive"
       });
       

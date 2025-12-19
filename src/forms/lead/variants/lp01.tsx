@@ -62,7 +62,7 @@ export const Lp01LeadFormDialogContent = (props: LeadFormVariantProps) => {
   const { isOpen, onClose } = props;
 
   const [step, setStep] = useState<
-    "q1" | "q2" | "q3" | "q4" | "disqualified" | "form"
+    "q1" | "q2" | "q3" | "q4" | "disqualified" | "form" | "thankyou"
   >("q1");
   const [disqualifyReason, setDisqualifyReason] = useState<
     "not_inss" | "below_2k" | "discount_low" | null
@@ -227,8 +227,8 @@ export const Lp01LeadFormDialogContent = (props: LeadFormVariantProps) => {
 
     if (success) {
       setIsFormSubmitted(true);
+      setStep("thankyou");
       resetValidation();
-      onClose();
     }
   };
 
@@ -256,6 +256,31 @@ export const Lp01LeadFormDialogContent = (props: LeadFormVariantProps) => {
     isValidating,
     isValid,
   ]);
+
+  if (step === "thankyou") {
+    return (
+      <DialogContent
+        className="sm:max-w-md rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.2)] border-0 [&>button]:hidden"
+        onInteractOutside={(e) => e.preventDefault()}
+        onEscapeKeyDown={(e) => e.preventDefault()}
+      >
+        <div className="text-center py-8">
+          <div className="flex justify-center mb-4">
+            <CheckCircle className="w-16 h-16 text-green-500" />
+          </div>
+
+          <DialogHeader className="text-center">
+            <DialogTitle className="text-purple-brand text-2xl font-bold tracking-tight leading-tight mb-2">
+              Redirecionando para o WhatsApp...
+            </DialogTitle>
+            <p className="text-gray-600 text-base font-medium">
+              Aguarde alguns instantes. Você será redirecionado automaticamente para continuar o atendimento.
+            </p>
+          </DialogHeader>
+        </div>
+      </DialogContent>
+    );
+  }
 
   if (isFormSubmitted) {
     return (

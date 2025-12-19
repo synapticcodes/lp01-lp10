@@ -11,7 +11,7 @@ import { LEAD_FIELD_IDS } from "@/forms/lead/fieldIds";
 export const Lp05LeadFormDialogContent = (props: LeadFormVariantProps) => {
   const { isOpen, onClose } = props;
   const [step, setStep] = useState<
-    "q1-inss" | "q2-benefit" | "q3-consignado" | "q4-debt" | "form" | "disqualified"
+    "q1-inss" | "q2-benefit" | "q3-consignado" | "q4-debt" | "form" | "disqualified" | "thankyou"
   >("q1-inss");
   const [disqualifyReason, setDisqualifyReason] = useState<
     "not_inss" | "below_3k" | "no_consignado" | null
@@ -149,6 +149,7 @@ export const Lp05LeadFormDialogContent = (props: LeadFormVariantProps) => {
     const hasValidLength = numbersOnly.length === 11;
     return (
       !formData.name ||
+      !formData.email ||
       !formData.phone ||
       !hasValidLength ||
       Boolean(nameValidationError) ||
@@ -172,7 +173,7 @@ export const Lp05LeadFormDialogContent = (props: LeadFormVariantProps) => {
     e.preventDefault();
     if (isFormSubmitted) return;
 
-    if (!formData.name || !formData.phone) return;
+    if (!formData.name || !formData.email || !formData.phone) return;
     if (formData.phone.replace(/\D/g, "").length !== 11) return;
     if (nameValidationError) return;
     if (emailValidationError) return;
@@ -181,7 +182,7 @@ export const Lp05LeadFormDialogContent = (props: LeadFormVariantProps) => {
     const success = await submitLead({
       name: formData.name,
       phone: formData.phone,
-      email: formData.email.trim() ? formData.email.trim() : undefined,
+      email: formData.email.trim(),
       isInssRetireeOrPensioner: qualification.isInssRetireeOrPensioner ?? undefined,
       benefitAbove2k: "yes",
       benefitRange: benefitRangeLabel,
@@ -193,13 +194,38 @@ export const Lp05LeadFormDialogContent = (props: LeadFormVariantProps) => {
     if (success) {
       localStorage.setItem("leadSubmitted", "true");
       setIsFormSubmitted(true);
-      onClose();
+      setStep("thankyou");
     }
   };
 
   useEffect(() => {
     if (!isOpen) resetValidation();
   }, [isOpen, resetValidation]);
+
+  if (step === "thankyou") {
+    return (
+      <DialogContent
+        className="sm:max-w-md rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.2)] border-0 [&>button]:hidden"
+        onInteractOutside={(e) => e.preventDefault()}
+        onEscapeKeyDown={(e) => e.preventDefault()}
+      >
+        <div className="text-center py-8">
+          <div className="flex justify-center mb-4">
+            <CheckCircle className="w-16 h-16 text-green-500" />
+          </div>
+
+          <DialogHeader className="text-center">
+            <DialogTitle className="text-purple-brand text-2xl font-bold tracking-tight leading-tight mb-2">
+              Redirecionando para o WhatsApp...
+            </DialogTitle>
+            <p className="text-gray-600 text-base font-medium">
+              Aguarde alguns instantes. Você será redirecionado automaticamente para continuar o atendimento.
+            </p>
+          </DialogHeader>
+        </div>
+      </DialogContent>
+    );
+  }
 
   if (isFormSubmitted) {
     return (
@@ -655,16 +681,15 @@ export const Lp05LeadFormDialogContent = (props: LeadFormVariantProps) => {
           <FloatingLabelInput
             id={LEAD_FIELD_IDS.email}
             type="email"
-            placeholder="Seu e-mail (opcional)"
+              placeholder="Seu melhor e-mail"
             value={formData.email}
             onChange={(value) => handleInputChange("email", value)}
             icon={Mail}
-            label="E-mail (opcional)"
+              label="E-mail"
             focusedField={focusedField}
             setFocusedField={setFocusedField}
             isValid={emailValidationError ? false : null}
             validationError={emailValidationError}
-            required={false}
           />
 
           <Button

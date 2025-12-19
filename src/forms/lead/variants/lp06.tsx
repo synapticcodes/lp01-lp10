@@ -7,7 +7,7 @@ import { FloatingLabelInput } from "@/components/ui/FloatingLabelInput";
 import { useWhatsappValidation } from "@/hooks/useWhatsappValidation";
 import { useAirtableSubmission } from "@/hooks/useAirtableSubmission";
 import { LEAD_FIELD_IDS } from "@/forms/lead/fieldIds";
-import { ArrowLeft, CheckCircle, Loader2, Phone, User, XCircle } from "lucide-react";
+import { ArrowLeft, CheckCircle, Loader2, Mail, Phone, User, XCircle } from "lucide-react";
 
 type AgeRange = "lt_40" | "40_54" | "55_65" | "gt_65" | null;
 type Professional =
@@ -207,7 +207,7 @@ export const Lp06LeadFormDialogContent = ({ isOpen, onClose }: LeadFormVariantPr
     loansCount: null,
   });
 
-  const [formData, setFormData] = useState({ name: "", phone: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const { isValidating, isValid, validationError, validateWhatsapp, resetValidation } =
@@ -230,7 +230,7 @@ export const Lp06LeadFormDialogContent = ({ isOpen, onClose }: LeadFormVariantPr
       debtsRange: null,
       loansCount: null,
     });
-    setFormData({ name: "", phone: "" });
+    setFormData({ name: "", email: "", phone: "" });
     setFocusedField(null);
     resetValidation();
   }, [isOpen, resetValidation]);
@@ -249,6 +249,14 @@ export const Lp06LeadFormDialogContent = ({ isOpen, onClose }: LeadFormVariantPr
 
     return null;
   }, [formData.name]);
+
+  const emailValidationError = useMemo(() => {
+    const email = formData.email.trim();
+    if (!email) return null;
+    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!isValidEmail) return "Informe um e-mail válido";
+    return null;
+  }, [formData.email]);
 
   const handleInputChange = <K extends keyof typeof formData>(
     field: K,
@@ -329,9 +337,11 @@ export const Lp06LeadFormDialogContent = ({ isOpen, onClose }: LeadFormVariantPr
 
     return (
       !formData.name ||
+      !formData.email ||
       !formData.phone ||
       !hasValidPhone ||
       Boolean(nameValidationError) ||
+      Boolean(emailValidationError) ||
       isSubmitting ||
       isFormSubmitted ||
       isValidating ||
@@ -344,6 +354,7 @@ export const Lp06LeadFormDialogContent = ({ isOpen, onClose }: LeadFormVariantPr
     isValidating,
     isValid,
     nameValidationError,
+    emailValidationError,
   ]);
 
   const handleFinalSubmit = async () => {
@@ -379,6 +390,7 @@ export const Lp06LeadFormDialogContent = ({ isOpen, onClose }: LeadFormVariantPr
     const success = await submitLead({
       name: formData.name,
       phone: formData.phone,
+      email: formData.email.trim(),
       isInssRetireeOrPensioner:
         answers.professional === "aposentado_inss" || answers.professional === "pensionista_inss"
           ? true
@@ -473,6 +485,32 @@ export const Lp06LeadFormDialogContent = ({ isOpen, onClose }: LeadFormVariantPr
 
   if (step === "thankyou") {
     const isDisqualified = outcome.value === "disqualified";
+
+    if (!isDisqualified) {
+      return (
+        <DialogContent
+          className="sm:max-w-md rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.2)] border-0 [&>button]:hidden"
+          onInteractOutside={(e) => e.preventDefault()}
+          onEscapeKeyDown={(e) => e.preventDefault()}
+        >
+          <div className="text-center py-6">
+            <div className="flex justify-center mb-4">
+              <CheckCircle className="w-14 h-14 text-green-600" aria-hidden="true" />
+            </div>
+
+            <DialogHeader className="text-center">
+              <DialogTitle className="text-purple-brand text-2xl font-bold tracking-tight leading-tight mb-2">
+                Redirecionando para o WhatsApp...
+              </DialogTitle>
+              <p className="text-gray-700 text-base font-medium">
+                Aguarde alguns instantes. Você será redirecionado automaticamente para continuar o atendimento.
+              </p>
+            </DialogHeader>
+          </div>
+        </DialogContent>
+      );
+    }
+
     return (
       <DialogContent className="sm:max-w-md rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.2)] border-0 [&>button]:hidden">
         <CloseButton onClose={onClose} />
@@ -939,6 +977,20 @@ export const Lp06LeadFormDialogContent = ({ isOpen, onClose }: LeadFormVariantPr
             isValidating={isValidating}
             isValid={isValid}
             validationError={validationError}
+          />
+
+          <FloatingLabelInput
+            id={LEAD_FIELD_IDS.email}
+            type="email"
+            placeholder="Seu melhor e-mail"
+            value={formData.email}
+            onChange={(value) => handleInputChange("email", value)}
+            icon={Mail}
+            label="E-mail"
+            focusedField={focusedField}
+            setFocusedField={setFocusedField}
+            isValid={emailValidationError ? false : null}
+            validationError={emailValidationError}
           />
 
           <div className="grid grid-cols-2 gap-3">

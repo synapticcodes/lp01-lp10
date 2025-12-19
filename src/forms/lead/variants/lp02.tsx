@@ -359,28 +359,23 @@ export const Lp02LeadFormDialogContent = ({ isOpen, onClose }: LeadFormVariantPr
 
   if (step === "thankyou") {
     return (
-      <DialogContent className="sm:max-w-md rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.2)] border-0 [&>button]:hidden">
-        <CloseButton onClose={onClose} />
+      <DialogContent
+        className="sm:max-w-md rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.2)] border-0 [&>button]:hidden"
+        onInteractOutside={(e) => e.preventDefault()}
+        onEscapeKeyDown={(e) => e.preventDefault()}
+      >
         <div className="text-center py-8">
           <div className="flex justify-center mb-4">
             <CheckCircle className="w-16 h-16 text-green-500" />
           </div>
           <DialogHeader className="text-center">
             <DialogTitle className="text-purple-brand text-2xl font-bold tracking-tight leading-tight mb-2">
-              Recebemos suas respostas.
+              Redirecionando para o WhatsApp...
             </DialogTitle>
             <p className="text-gray-600 text-base font-medium">
-              Se o caso se encaixar, nossa equipe entrará em contato pelo WhatsApp.
+              Aguarde alguns instantes. Você será redirecionado automaticamente para continuar o atendimento.
             </p>
           </DialogHeader>
-
-          <Button
-            type="button"
-            onClick={onClose}
-            className="w-full h-12 mt-6 bg-purple-brand hover:bg-lavender-800 text-white font-semibold rounded-lg"
-          >
-            Entendi
-          </Button>
         </div>
       </DialogContent>
     );
@@ -653,11 +648,7 @@ export const Lp02LeadFormDialogContent = ({ isOpen, onClose }: LeadFormVariantPr
               <div className="flex items-start gap-3">
                 <Checkbox id="lgpd" checked={lgpdAccepted} onCheckedChange={(checked) => setLgpdAccepted(Boolean(checked))} />
                 <Label htmlFor="lgpd" className="text-gray-800 text-sm leading-relaxed cursor-pointer">
-                  Li e concordo com a{" "}
-                  <a href="#politica-de-privacidade" className="underline" target="_self" rel="noreferrer">
-                    Política de Privacidade
-                  </a>{" "}
-                  e autorizo contato pelo WhatsApp.
+                  Li e concordo com a Política de Privacidade e autorizo contato pelo WhatsApp.
                 </Label>
               </div>
             </div>
