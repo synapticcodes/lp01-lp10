@@ -38,6 +38,7 @@ const parseNumberPtBR = (raw: string) => {
 export const ProblemSection = ({ copy }: { copy?: ProblemCopy }) => {
   const resolvedCopy = copy ?? defaultCopy;
   const problems = resolvedCopy.bullets;
+  const showCalculator = resolvedCopy.showCalculator !== false;
 
   const [benefitValue, setBenefitValue] = useState("");
   const [discountPercent, setDiscountPercent] = useState("");
@@ -59,6 +60,11 @@ export const ProblemSection = ({ copy }: { copy?: ProblemCopy }) => {
           <h2 className="text-purple-brand font-bold text-2xl lg:text-3xl xl:text-4xl">
             {resolvedCopy.title}
           </h2>
+          {resolvedCopy.intro ? (
+            <p className="text-gray-700 text-base lg:text-lg mt-3 max-w-3xl mx-auto">
+              {resolvedCopy.intro}
+            </p>
+          ) : null}
         </div>
         
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -85,55 +91,63 @@ export const ProblemSection = ({ copy }: { copy?: ProblemCopy }) => {
               </div>
             ))}
 
-            <div className="mt-6 rounded-xl border border-lavender bg-white p-4 lg:p-6">
-              <h3 className="text-blue-vibrant font-bold text-lg lg:text-xl mb-2">
-                {resolvedCopy.calculatorTitle}
-              </h3>
-              <p className="text-gray-700 text-base mb-4">
-                {resolvedCopy.calculatorBody}
-              </p>
+            {showCalculator ? (
+              <div className="mt-6 rounded-xl border border-lavender bg-white p-4 lg:p-6">
+                <h3 className="text-blue-vibrant font-bold text-lg lg:text-xl mb-2">
+                  {resolvedCopy.calculatorTitle}
+                </h3>
+                <p className="text-gray-700 text-base mb-4">
+                  {resolvedCopy.calculatorBody}
+                </p>
 
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="benefitValue" className="block text-gray-900 font-semibold text-base mb-2">
-                    {resolvedCopy.benefitLabel}
-                  </label>
-                  <input
-                    id="benefitValue"
-                    inputMode="decimal"
-                    autoComplete="off"
-                    className="w-full h-11 rounded-lg border border-gray-300 px-3 text-base focus:outline-none focus:ring-2 focus:ring-lavender-400"
-                    placeholder="Ex.: 3.500"
-                    value={benefitValue}
-                    onChange={(e) => setBenefitValue(e.target.value)}
-                  />
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="benefitValue" className="block text-gray-900 font-semibold text-base mb-2">
+                      {resolvedCopy.benefitLabel}
+                    </label>
+                    <input
+                      id="benefitValue"
+                      inputMode="decimal"
+                      autoComplete="off"
+                      className="w-full h-11 rounded-lg border border-gray-300 px-3 text-base focus:outline-none focus:ring-2 focus:ring-lavender-400"
+                      placeholder="Ex.: 3.500"
+                      value={benefitValue}
+                      onChange={(e) => setBenefitValue(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="discountPercent" className="block text-gray-900 font-semibold text-base mb-2">
+                      {resolvedCopy.percentLabel}
+                    </label>
+                    <input
+                      id="discountPercent"
+                      inputMode="numeric"
+                      autoComplete="off"
+                      className="w-full h-11 rounded-lg border border-gray-300 px-3 text-base focus:outline-none focus:ring-2 focus:ring-lavender-400"
+                      placeholder="Ex.: 40"
+                      value={discountPercent}
+                      onChange={(e) => setDiscountPercent(e.target.value)}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label htmlFor="discountPercent" className="block text-gray-900 font-semibold text-base mb-2">
-                    {resolvedCopy.percentLabel}
-                  </label>
-                  <input
-                    id="discountPercent"
-                    inputMode="numeric"
-                    autoComplete="off"
-                    className="w-full h-11 rounded-lg border border-gray-300 px-3 text-base focus:outline-none focus:ring-2 focus:ring-lavender-400"
-                    placeholder="Ex.: 40"
-                    value={discountPercent}
-                    onChange={(e) => setDiscountPercent(e.target.value)}
-                  />
-                </div>
-              </div>
 
-              <div className="mt-4 rounded-lg bg-lavender/10 p-4">
-                <p className="text-gray-900 text-base lg:text-lg">
-                  {resolvedCopy.resultLabel}: <span className="font-bold text-purple-brand">{formatCurrencyBRL(monthlyLoss)}</span> perdidos mensalmente
+                <div className="mt-4 rounded-lg bg-lavender/10 p-4">
+                  <p className="text-gray-900 text-base lg:text-lg">
+                    {resolvedCopy.resultLabel}: <span className="font-bold text-purple-brand">{formatCurrencyBRL(monthlyLoss)}</span> perdidos mensalmente
+                  </p>
+                </div>
+
+                <p className="text-gray-800 text-base font-semibold mt-4">
+                  {resolvedCopy.closingLine}
                 </p>
               </div>
+            ) : null}
 
-              <p className="text-gray-800 text-base font-semibold mt-4">
-                {resolvedCopy.closingLine}
+            {resolvedCopy.note ? (
+              <p className="text-gray-600 text-sm lg:text-base mt-4">
+                {resolvedCopy.note}
               </p>
-            </div>
+            ) : null}
           </div>
         </div>
       </div>

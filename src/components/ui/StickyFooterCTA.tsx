@@ -31,10 +31,10 @@ export const StickyFooterCTA = ({ ctaLabel }: StickyFooterCTAProps) => {
 
   return (
     <>
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-lavender/20 p-4 shadow-lg md:hidden">
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-lavender/20 px-4 pt-4 pb-[calc(env(safe-area-inset-bottom)+1rem)] shadow-lg md:hidden">
         <Button 
           onClick={handleCTAClick}
-          className="w-full h-12 bg-purple-brand hover:bg-lavender-800 text-white font-semibold text-base rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+          className="w-full min-h-12 h-auto py-3 px-4 bg-purple-brand hover:bg-lavender-800 text-white font-semibold text-sm sm:text-base rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex flex-wrap items-center justify-center gap-2 whitespace-normal text-center leading-snug"
         >
           {ctaLabel ?? "Quero minha análise gratuita"}
           <ArrowRight className="w-4 h-4 text-yellow-vibrant" />

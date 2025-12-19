@@ -6,6 +6,7 @@ import { FloatingLabelInput } from "@/components/ui/FloatingLabelInput";
 import { useWhatsappValidation } from "@/hooks/useWhatsappValidation";
 import { useAirtableSubmission } from "@/hooks/useAirtableSubmission";
 import type { LeadFormVariantProps } from "@/forms/lead/types";
+import { LEAD_FIELD_IDS } from "@/forms/lead/fieldIds";
 
 export const DefaultLeadFormDialogContent = ({ isOpen, onClose }: LeadFormVariantProps) => {
   const [step, setStep] = useState<
@@ -394,7 +395,7 @@ export const DefaultLeadFormDialogContent = ({ isOpen, onClose }: LeadFormVarian
 
           <form onSubmit={handleSubmit} className="space-y-6 mt-6">
             <FloatingLabelInput
-              id="name"
+              id={LEAD_FIELD_IDS.name}
               type="text"
               placeholder="Seu nome completo"
               value={formData.name}
@@ -408,7 +409,7 @@ export const DefaultLeadFormDialogContent = ({ isOpen, onClose }: LeadFormVarian
             />
 
             <FloatingLabelInput
-              id="email"
+              id={LEAD_FIELD_IDS.email}
               type="email"
               placeholder="Seu melhor e-mail"
               value={formData.email}
@@ -422,7 +423,7 @@ export const DefaultLeadFormDialogContent = ({ isOpen, onClose }: LeadFormVarian
             />
 
             <FloatingLabelInput
-              id="phone"
+              id={LEAD_FIELD_IDS.phone}
               type="tel"
               placeholder="(11) 9 9999-9999"
               value={formData.phone}
