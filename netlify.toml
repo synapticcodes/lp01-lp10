@@ -38,23 +38,38 @@
   status = 301
 
 [[redirects]]
+  from = "/lp08"
+  to = "/lp06"
+  status = 301
+
+[[redirects]]
+  from = "/lp09"
+  to = "/lp06"
+  status = 301
+
+[[redirects]]
+  from = "/lp10"
+  to = "/lp06"
+  status = 301
+
+[[redirects]]
   from = "/lp-07"
   to = "/lp07"
   status = 301
 
 [[redirects]]
   from = "/lp-08"
-  to = "/lp08"
+  to = "/lp06"
   status = 301
 
 [[redirects]]
   from = "/lp-09"
-  to = "/lp09"
+  to = "/lp06"
   status = 301
 
 [[redirects]]
   from = "/lp-10"
-  to = "/lp10"
+  to = "/lp06"
   status = 301
 
 # SPA fallback for React Router routes

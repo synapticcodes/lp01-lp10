@@ -30,6 +30,47 @@ const defaultCopy: TestimonialsCopy = {
 export const TestimonialsSection = ({ copy }: { copy?: TestimonialsCopy }) => {
   const resolvedCopy = copy ?? defaultCopy;
   const testimonials = resolvedCopy.testimonials;
+  const showProofImages = resolvedCopy.showProofImages !== false;
+
+  if (resolvedCopy.mode === "documents") {
+    return (
+      <section className="py-12 lg:py-16 px-4 bg-white">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-center text-purple-brand font-bold text-2xl lg:text-3xl xl:text-4xl mb-6">
+            {resolvedCopy.title}
+          </h2>
+          {resolvedCopy.documentsBody ? (
+            <p className="text-gray-700 text-base lg:text-lg text-center mb-8">
+              {resolvedCopy.documentsBody}
+            </p>
+          ) : null}
+
+          {resolvedCopy.documentsBullets?.length ? (
+            <div className="rounded-2xl border border-lavender bg-lavender/5 p-5 lg:p-6">
+              <ul className="space-y-3">
+                {resolvedCopy.documentsBullets.map((item, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <span className="mt-1 inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-vibrant/10 text-blue-vibrant font-bold">
+                      ✓
+                    </span>
+                    <span className="text-gray-900 text-base lg:text-lg leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
+          {resolvedCopy.documentsWarning ? (
+            <div className="mt-6 rounded-xl border border-yellow-vibrant/30 bg-yellow-vibrant/10 p-4">
+              <p className="text-gray-900 font-semibold text-base">{resolvedCopy.documentsWarning}</p>
+            </div>
+          ) : null}
+        </div>
+      </section>
+    );
+  }
+
+  if (!testimonials.length) return null;
 
   return (
     <section className="py-12 lg:py-16 px-4 bg-white">
@@ -42,7 +83,7 @@ export const TestimonialsSection = ({ copy }: { copy?: TestimonialsCopy }) => {
           {testimonials.map((testimonial, index) => (
             <div key={index} className="bg-lavender/5 rounded-xl p-4 lg:p-6 relative">
               {/* Imagem quadrada grande acima do texto conforme solicitado */}
-              {index === 0 && (
+              {showProofImages && index === 0 && (
                 <div className="flex justify-center mb-4 lg:mb-6">
                   <img
                     src="/lovable-uploads/c51da9e7-37d9-415c-a912-20fb7034afbf.png"
@@ -51,7 +92,7 @@ export const TestimonialsSection = ({ copy }: { copy?: TestimonialsCopy }) => {
                   />
                 </div>
               )}
-              {index === 1 && (
+              {showProofImages && index === 1 && (
                 <div className="flex justify-center mb-4 lg:mb-6">
                   <img
                     src="/lovable-uploads/8fd9b21a-f400-48d5-96e5-9dc003edf59c.png"
@@ -60,7 +101,7 @@ export const TestimonialsSection = ({ copy }: { copy?: TestimonialsCopy }) => {
                   />
                 </div>
               )}
-              {index === 2 && (
+              {showProofImages && index === 2 && (
                 <div className="flex justify-center mb-4 lg:mb-6">
                   <img
                     src="/lovable-uploads/f170b4f7-a7a6-4ce7-a368-af9eb2f42042.png"
@@ -99,9 +140,11 @@ export const TestimonialsSection = ({ copy }: { copy?: TestimonialsCopy }) => {
           ))}
         </div>
 
-        <div className="flex justify-center">
-          <GuaranteeStamp />
-        </div>
+        {resolvedCopy.showGuaranteeStamp === false ? null : (
+          <div className="flex justify-center">
+            <GuaranteeStamp />
+          </div>
+        )}
       </div>
     </section>
   );
