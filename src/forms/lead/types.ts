@@ -4,7 +4,8 @@ export type LeadFormVariantKey =
   | "lp03"
   | "lp04"
   | "lp05"
-  | "lp06";
+  | "lp06"
+  | "lp07";
 
 export type LeadFormVariantProps = {
   isOpen: boolean;

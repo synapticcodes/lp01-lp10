@@ -3,6 +3,8 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { ClarificationSection } from "@/components/sections/ClarificationSection";
 import { ProblemSection } from "@/components/sections/ProblemSection";
 import { SolutionSection } from "@/components/sections/SolutionSection";
+import { BenefitsSection } from "@/components/sections/BenefitsSection";
+import { BenefitsListSection } from "@/components/sections/BenefitsListSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { FAQSection } from "@/components/sections/FAQSection";
@@ -33,8 +35,10 @@ const Landing = ({ variantKeyOverride }: LandingProps) => {
         <ClarificationSection copy={copy.clarification} />
         <ProblemSection copy={copy.problem} />
         <SolutionSection copy={copy.solution} />
+        <BenefitsSection />
         <TestimonialsSection copy={copy.testimonials} />
         <ProcessSection copy={copy.process} />
+        <BenefitsListSection copy={copy.benefitsList} />
         <FAQSection copy={copy.faq} />
         <FinalCTASection copy={copy.finalCta} />
       </main>

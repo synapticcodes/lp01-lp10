@@ -6,6 +6,7 @@ import { Lp03LeadFormDialogContent } from "@/forms/lead/variants/lp03";
 import { Lp04LeadFormDialogContent } from "@/forms/lead/variants/lp04";
 import { Lp05LeadFormDialogContent } from "@/forms/lead/variants/lp05";
 import { Lp06LeadFormDialogContent } from "@/forms/lead/variants/lp06";
+import { Lp07LeadFormDialogContent } from "@/forms/lead/variants/lp07";
 
 export type LeadFormVariantComponent = (props: LeadFormVariantProps) => JSX.Element;
 
@@ -16,10 +17,11 @@ export const leadFormVariants: Record<LeadFormVariantKey, LeadFormVariantCompone
   lp04: Lp04LeadFormDialogContent,
   lp05: Lp05LeadFormDialogContent,
   lp06: Lp06LeadFormDialogContent,
+  lp07: Lp07LeadFormDialogContent,
 };
 
 export const getLeadFormVariantFromPath = (pathname: string): LeadFormVariantKey => {
-  const match = pathname.match(/^\/lp-?(0[1-6])(\/|$)/);
+  const match = pathname.match(/^\/lp-?(0[1-7])(\/|$)/);
   if (!match) return "lp06";
   return (`lp${match[1]}` as LeadFormVariantKey);
 };
