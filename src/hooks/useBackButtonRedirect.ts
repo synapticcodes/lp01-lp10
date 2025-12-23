@@ -7,8 +7,8 @@ export const useBackButtonRedirect = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Apply only on landing pages (/lp01..lp06) and legacy (/lp-01..lp-06)
-    const isLandingPath = /^\/lp-?(0[1-6])(\/|$)/.test(location.pathname);
+    // Apply only on landing pages (/lp01..lp07) and legacy (/lp-01..lp-07)
+    const isLandingPath = /^\/lp-?(0[1-7])(\/|$)/.test(location.pathname);
     if (!isLandingPath) return;
 
     // Clear any existing lead submission flag for new visits

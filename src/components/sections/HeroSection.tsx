@@ -26,6 +26,8 @@ export const HeroSection = ({ copy }: HeroSectionProps) => {
     boosterText: "Sem custo agora. Seus dados ficam 100% seguros.",
   };
 
+  const hasBadge = Boolean(resolvedCopy.badge?.trim());
+
   const handleCTAClick = () => {
     console.log("CTA clicked - Opening lead form");
     setIsDialogOpen(true);
@@ -49,11 +51,13 @@ export const HeroSection = ({ copy }: HeroSectionProps) => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Content */}
           <div className="space-y-6 animate-fade-in order-2 lg:order-1">
-            <div className="flex justify-center lg:justify-start">
-              <span className="inline-flex items-center rounded-full bg-blue-vibrant/10 px-4 py-2 text-blue-vibrant font-semibold text-sm lg:text-base">
-                {resolvedCopy.badge}
-              </span>
-            </div>
+            {hasBadge ? (
+              <div className="flex justify-center lg:justify-start">
+                <span className="inline-flex items-center rounded-full bg-blue-vibrant/10 px-4 py-2 text-blue-vibrant font-semibold text-sm lg:text-base">
+                  {resolvedCopy.badge}
+                </span>
+              </div>
+            ) : null}
 
             {/* Eyebrow */}
             {resolvedCopy.eyebrow ? (

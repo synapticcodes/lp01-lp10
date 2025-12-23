@@ -41,6 +41,15 @@ export const SolutionSection = ({ copy }: { copy?: SolutionCopy }) => {
   const solutions = resolvedCopy.items;
   const beforePercent = clampPercent(resolvedCopy.beforeBarPercent ?? 80);
   const afterPercent = clampPercent(resolvedCopy.afterBarPercent ?? 100);
+  const showBadge = Boolean(resolvedCopy.badgeLeft || resolvedCopy.badgeRight);
+  const showComparison = Boolean(
+    resolvedCopy.beforeAfterTitle ||
+      resolvedCopy.beforeLabel ||
+      resolvedCopy.beforeRight ||
+      resolvedCopy.afterLabel ||
+      resolvedCopy.afterRight ||
+      resolvedCopy.footer
+  );
 
   if (resolvedCopy.mode === "lp02") {
     return (
@@ -134,10 +143,12 @@ export const SolutionSection = ({ copy }: { copy?: SolutionCopy }) => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Solutions List */}
           <div className="space-y-4 lg:space-y-6 order-2 lg:order-1">
-            <div className="inline-flex items-center gap-2 rounded-lg bg-white border border-lavender px-4 py-3">
-              <span className="font-bold text-blue-vibrant">{resolvedCopy.badgeLeft}</span>
-              <span className="text-gray-700 text-base">{resolvedCopy.badgeRight}</span>
-            </div>
+            {showBadge ? (
+              <div className="inline-flex items-center gap-2 rounded-lg bg-white border border-lavender px-4 py-3">
+                <span className="font-bold text-blue-vibrant">{resolvedCopy.badgeLeft}</span>
+                <span className="text-gray-700 text-base">{resolvedCopy.badgeRight}</span>
+              </div>
+            ) : null}
 
             {solutions.map((solution, index) => (
               <div key={index} className="flex items-start gap-3 lg:gap-4 text-left">
@@ -149,26 +160,30 @@ export const SolutionSection = ({ copy }: { copy?: SolutionCopy }) => {
               </div>
             ))}
 
-            <div className="mt-6 rounded-xl border border-lavender bg-white p-4 lg:p-6">
-              <p className="text-gray-900 font-bold text-lg lg:text-xl mb-3">{resolvedCopy.beforeAfterTitle}</p>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-gray-800 font-semibold">{resolvedCopy.beforeLabel}</span>
-                  <div className="flex-1 h-3 rounded-full bg-gray-200 overflow-hidden">
-                    <div className="h-full bg-yellow-vibrant" style={{ width: `${beforePercent}%` }} />
+            {showComparison ? (
+              <div className="mt-6 rounded-xl border border-lavender bg-white p-4 lg:p-6">
+                <p className="text-gray-900 font-bold text-lg lg:text-xl mb-3">
+                  {resolvedCopy.beforeAfterTitle}
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="text-gray-800 font-semibold">{resolvedCopy.beforeLabel}</span>
+                    <div className="flex-1 h-3 rounded-full bg-gray-200 overflow-hidden">
+                      <div className="h-full bg-yellow-vibrant" style={{ width: `${beforePercent}%` }} />
+                    </div>
+                    <span className="text-gray-800 font-semibold">{resolvedCopy.beforeRight}</span>
                   </div>
-                  <span className="text-gray-800 font-semibold">{resolvedCopy.beforeRight}</span>
-                </div>
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-gray-800 font-semibold">{resolvedCopy.afterLabel}</span>
-                  <div className="flex-1 h-3 rounded-full bg-gray-200 overflow-hidden">
-                    <div className="h-full bg-blue-vibrant" style={{ width: `${afterPercent}%` }} />
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="text-gray-800 font-semibold">{resolvedCopy.afterLabel}</span>
+                    <div className="flex-1 h-3 rounded-full bg-gray-200 overflow-hidden">
+                      <div className="h-full bg-blue-vibrant" style={{ width: `${afterPercent}%` }} />
+                    </div>
+                    <span className="text-gray-800 font-semibold">{resolvedCopy.afterRight}</span>
                   </div>
-                  <span className="text-gray-800 font-semibold">{resolvedCopy.afterRight}</span>
                 </div>
+                <p className="text-gray-700 text-base mt-4">{resolvedCopy.footer}</p>
               </div>
-              <p className="text-gray-700 text-base mt-4">{resolvedCopy.footer}</p>
-            </div>
+            ) : null}
           </div>
 
           {/* Image */}

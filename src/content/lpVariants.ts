@@ -94,6 +94,16 @@ export interface TestimonialsCopy {
   showGuaranteeStamp?: boolean;
 }
 
+export interface BenefitsListItemCopy {
+  title: string;
+  description: string;
+}
+
+export interface BenefitsListCopy {
+  title: string;
+  items: BenefitsListItemCopy[];
+}
+
 export interface ProcessStepCopy {
   title: string;
   description: string;
@@ -120,6 +130,7 @@ export interface LandingCopy {
   clarification?: ClarificationCopy;
   problem: ProblemCopy;
   solution: SolutionCopy;
+  benefitsList?: BenefitsListCopy;
   testimonials: TestimonialsCopy;
   process: ProcessCopy;
   faq: FaqCopy;
@@ -433,7 +444,7 @@ export const landingVariants: Record<string, LandingCopy> = {
         "Atuação jurídica voltada a aposentados e pensionistas do INSS com desconto de empréstimo consignado no benefício.",
       topBarMicrotext: "Conteúdo informativo. Atendimento mediante análise individual.",
       boosterText: "",
-      showTrustBar: false,
+      showTrustBar: true,
       trustBlockTitle: "Como funciona o primeiro contato",
       trustBlockItems: [
         "Triagem rápida (2 minutos)",
@@ -1198,15 +1209,16 @@ export const landingVariants: Record<string, LandingCopy> = {
     ...base,
     hero: {
       ...base.hero,
-      badge: "ATENDIMENTO EXCLUSIVO — INSS E SERVIDOR PÚBLICO APOSENTADO",
-      eyebrow: "Aposentado, pensionista ou servidor público com consignado alto?",
-      headline: "Aposentado, o Consignado Está Consumindo Mais de 40% do Seu INSS?",
+      badge: "",
+      eyebrow: "",
+      headline:
+        "Livre seu benefício dos descontos abusivos e volte a respirar em 30 dias ou menos.",
       subheadline:
-        "Atendemos exclusivamente aposentados, pensionistas do INSS e servidores públicos com dívidas de consignado abusivas. Recupere até 90% da sua renda e limpe seu nome sem sair de casa, com um processo 100% online.",
-      ctaLabel: "SIM, QUERO FALAR COM UM ESPECIALISTA",
+        "Ajudamos aposentados, pensionistas e servidores a cortar cobranças ilegais, limpar o nome e recuperar a paz financeira — sem sair de casa.",
+      ctaLabel: "Sim, quero recuperar minha margem",
       eligibilityNotice:
-        "Importante: nosso atendimento é voltado apenas para aposentados/pensionistas do INSS e servidores públicos aposentados com dívidas de consignado. Se não for seu caso, vamos te orientar para os canais mais adequados.",
-      boosterText: "Análise gratuita • Atendimento 100% digital • Dados protegidos (LGPD)",
+        "Sem custo agora. Seus dados ficam 100% seguros.",
+      boosterText: "",
     },
     clarification: {
       mode: "eligibility",
@@ -1354,12 +1366,184 @@ export const landingVariants: Record<string, LandingCopy> = {
         "✅ 100% Garantido • ✅ Atendimento imediato • ✅ Dados 100% seguros • ✅ Sem compromisso",
     },
   },
+  "lp07": {
+    ...base,
+    hero: {
+      ...base.hero,
+      badge: "Você sofre com descontos que levam quase todo o seu benefício?",
+      eyebrow: "",
+      headline:
+        "Livre seu benefício dos descontos abusivos e volte a respirar em 30 dias ou menos.",
+      subheadline:
+        "Ajudamos aposentados, pensionistas e servidores a cortar cobranças ilegais, limpar o nome e recuperar a paz financeira — sem sair de casa.",
+      ctaLabel: "Sim, quero recuperar minha margem",
+      ctaMicrocopy: "Sem custo agora. Seus dados ficam 100% seguros.",
+      boosterText: "",
+      showTrustBar: true,
+      showGuaranteeStamp: true,
+    },
+    problem: {
+      ...base.problem,
+      badge: "+ de 30 mil clientes",
+      title: "O preço alto de não agir",
+      bullets: [
+        "Descontos consignados que consomem até 80% do benefício",
+        "Juros abusivos que só aumentam mês após mês",
+        "Nome sujo que impede novas oportunidades",
+        "Estresse constante e noites mal dormidas",
+        "Dependência financeira dos filhos",
+      ],
+      showCalculator: false,
+    },
+    solution: {
+      ...base.solution,
+      title: "A nova maneira de resolver",
+      subtitle: "Simples. Rápido. Transparente.",
+      items: [
+        { action: "Bloqueamos", description: "novos descontos ilegais no seu benefício" },
+        {
+          action: "Reduzimos em até 90%",
+          description: "as parcelas que você paga hoje",
+        },
+        {
+          action: "Limpamos seu nome",
+          description: "dos órgãos de proteção ao crédito",
+        },
+        {
+          action: "Devolvemos valores",
+          description: "pagos indevidamente nos últimos 5 anos",
+        },
+      ],
+      badgeLeft: "",
+      badgeRight: "",
+      beforeAfterTitle: "",
+      beforeLabel: "",
+      beforeRight: "",
+      afterLabel: "",
+      afterRight: "",
+      beforeBarPercent: 0,
+      afterBarPercent: 0,
+      footer: "",
+    },
+    testimonials: {
+      ...base.testimonials,
+      title: "Quem já conquistou sua liberdade",
+      testimonials: [
+        {
+          name: "Evaristo Neto",
+          role: "Aposentado",
+          text: "Recuperei R$ 60 mil em descontos indevidos. Agora posso viver com dignidade.",
+          image: "/lovable-uploads/770f24ba-712b-48c6-8348-629c55780154.png",
+        },
+        {
+          name: "João Santos",
+          role: "Pensionista",
+          text: "Em 30 dias quitaram R$ 55 mil das minhas dívidas de consignado. Recomendo!",
+          image: "/lovable-uploads/66607520-da93-457f-9540-627eb8234316.png",
+        },
+        {
+          name: "Ana Costa",
+          role: "Servidora pública",
+          text: "Profissionais sérios que realmente cumprem o que prometem. Recebi R$ 10.000 em indenização por abusos em meu consignado.",
+          image: "/lovable-uploads/0159e8f4-d08a-4cc3-b6b5-99ffcd5ba296.png",
+        },
+      ],
+    },
+    process: {
+      ...base.process,
+      title: "Como funciona em 3 passos simples",
+      steps: [
+        {
+          title: "Clique",
+          description: "Preencha o formulário com seus dados básicos",
+        },
+        {
+          title: "Análise",
+          description: "Nossa equipe analisa seu caso gratuitamente",
+        },
+        {
+          title: "Salário livre",
+          description: "Você volta a ter controle total do seu dinheiro",
+        },
+      ],
+    },
+    benefitsList: {
+      title: "Por que escolher nossa ajuda",
+      items: [
+        {
+          title: "Analisamos Gratuitamente Seu Caso",
+          description: "Análise completa e gratuita do seu caso",
+        },
+        {
+          title: "Sempre ao Seu Lado",
+          description: "Acompanhamento personalizado durante todo processo",
+        },
+        {
+          title: "Trabalhando por Você!",
+          description: "Equipe especializada em direito previdenciário",
+        },
+        {
+          title: "Vitória Garantida ou Seu Dinheiro de Volta",
+          description: "Resultados garantidos ou seu dinheiro de volta",
+        },
+        {
+          title: "Atendimento 100% digital, sem sair de casa",
+          description: "Atendimento 100% digital, sem sair de casa",
+        },
+      ],
+    },
+    faq: {
+      ...base.faq,
+      items: [
+        {
+          question: "Como vocês podem reduzir meus descontos?",
+          answer:
+            "Através de análise jurídica especializada, identificamos cobranças ilegais e pressionamos diretamente os bancos para reduzir ou eliminar os descontos abusivos",
+        },
+        {
+          question: "Quanto tempo demora para ver resultados?",
+          answer:
+            "Geralmente entre 15 a 30 dias úteis você já começa a ver os primeiros resultados, com a redução ou bloqueio dos descontos",
+        },
+        {
+          question: "É realmente grátis a análise?",
+          answer:
+            "Sim, a análise do seu caso é 100% gratuita e sem compromisso. Você só paga se decidir prosseguir com nossos serviços",
+        },
+        {
+          question: "Preciso sair de casa?",
+          answer:
+            "Não! Todo o processo é 100% digital. Você resolverá tudo pelo WhatsApp",
+        },
+        {
+          question: "E se não conseguirem me ajudar?",
+          answer:
+            "Oferecemos garantia de resultado. Se não conseguirmos reduzir seus descontos, você não paga nada",
+        },
+      ],
+    },
+    finalCta: {
+      ...base.finalCta,
+      title: "Pronto para recuperar seu salário?",
+      body:
+        "Não deixe mais um mês passar perdendo dinheiro com descontos abusivos. Sua análise gratuita está a um clique de distância",
+      ctaLabel: "Sim, quero recuperar minha margem",
+      microcopy:
+        "Atendimento imediato • Dados 100% seguros • Sem compromisso",
+      footerIdentificationLines: [
+        "Cada dia que passa sem agir é dinheiro que sai do seu bolso. Milhares de aposentados e pensionistas já recuperaram sua dignidade financeira",
+        "Na Meu Nome Ok, nossa missão é simples: devolver o controle do seu dinheiro para você",
+      ],
+      footerDisclaimer:
+        "P.S.: Os bancos contam com sua inércia para continuar lucrando. Não deixe isso acontecer mais um dia sequer",
+    },
+  },
 };
 
 export const getLandingVariant = (key: string | undefined): LandingCopy => {
   const normalized = (() => {
     if (!key) return "lp01";
-    const match = key.match(/^lp-?(0[1-6])$/);
+    const match = key.match(/^lp-?(0[1-7])$/);
     if (!match) return "lp01";
     return `lp${match[1]}`;
   })();
