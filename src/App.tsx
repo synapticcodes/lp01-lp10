@@ -13,12 +13,12 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const LP_KEYS = Array.from({ length: 9 }, (_, index) => {
+const LP_KEYS = Array.from({ length: 10 }, (_, index) => {
   const id = String(index + 1).padStart(2, "0");
   return `lp${id}`;
 });
 
-const LEGACY_LP_KEYS = Array.from({ length: 9 }, (_, index) => {
+const LEGACY_LP_KEYS = Array.from({ length: 10 }, (_, index) => {
   const id = String(index + 1).padStart(2, "0");
   return `lp-${id}`;
 });
@@ -64,8 +64,6 @@ const App = () => (
                 element={<Navigate to={`/${LP_KEYS[index]}`} replace />}
               />
             ))}
-            <Route path="/lp10" element={<Navigate to="/lp06" replace />} />
-            <Route path="/lp-10" element={<Navigate to="/lp06" replace />} />
             <Route path="/obrigado" element={<ThankYou />} />
             <Route path="/ultima-chance" element={<BackRedirect />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
