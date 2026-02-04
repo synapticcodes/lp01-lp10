@@ -38,11 +38,6 @@
   status = 301
 
 [[redirects]]
-  from = "/lp09"
-  to = "/lp06"
-  status = 301
-
-[[redirects]]
   from = "/lp10"
   to = "/lp06"
   status = 301
@@ -59,7 +54,7 @@
 
 [[redirects]]
   from = "/lp-09"
-  to = "/lp06"
+  to = "/lp09"
   status = 301
 
 [[redirects]]
