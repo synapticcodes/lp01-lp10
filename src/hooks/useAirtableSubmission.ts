@@ -24,6 +24,7 @@ interface LeadData {
   incomeOrigin?: string;
   mainProblem?: string;
   incomeRange?: string;
+  paidServiceAcknowledgement?: string;
 }
 
 type AirtableSubmissionOptions = {
@@ -170,6 +171,7 @@ export const useAirtableSubmission = (options: AirtableSubmissionOptions = {}) =
         "Origem da renda": leadData.incomeOrigin,
         "Principal problema": leadData.mainProblem,
         "Renda mensal aproximada": leadData.incomeRange,
+        "Ciente que o serviço é pago": leadData.paidServiceAcknowledgement,
       };
 
       const payload = {
