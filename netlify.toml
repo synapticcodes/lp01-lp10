@@ -57,6 +57,11 @@
   to = "/lp10"
   status = 301
 
+[[redirects]]
+  from = "/lp-11"
+  to = "/lp11"
+  status = 301
+
 # SPA fallback for React Router routes
 [[redirects]]
   from = "/*"
