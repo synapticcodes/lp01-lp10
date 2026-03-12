@@ -13,12 +13,12 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const LP_KEYS = Array.from({ length: 10 }, (_, index) => {
+const LP_KEYS = Array.from({ length: 11 }, (_, index) => {
   const id = String(index + 1).padStart(2, "0");
   return `lp${id}`;
 });
 
-const LEGACY_LP_KEYS = Array.from({ length: 10 }, (_, index) => {
+const LEGACY_LP_KEYS = Array.from({ length: 11 }, (_, index) => {
   const id = String(index + 1).padStart(2, "0");
   return `lp-${id}`;
 });
